@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { withStyles } from "@material-ui/core/styles";
 import "../App.css";
+import {addBookConfiguration,addUploadConfiguration} from '../configuration/configuration'
 
 const useStyles = theme => ({
   root: {
@@ -44,19 +45,36 @@ class BasicTextFields extends Component {
     Author: "",
     Price: 0,
     Stock: 0,
+    Year: 0,
     BookDetails: "",
-    Url: ""
+    files: "",
+    imgName: ""
   };
 
   changeUrl = event => {
-    this.setState({ url: event.target.value });
+    this.setState({ files: event.target.value });
   };
 
   updateState = (event) => {
-    this.setState({ [event.target.name] : event.target.value })
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   addBook = () => {
+    addBookConfiguration(this.state);
+  }
+
+  uploadButtonClick = async (event) => {
+    await this.setState({
+      files:event.target.files[0], 
+      imgName:event.target.value
+    });
+    const formData = new FormData();
+    formData.append('file',this.state.files);
+    addUploadConfiguration(formData).then((response)=>{
+      this.setState({
+        files:response.data
+      })
+    })
   }
 
   render() {
@@ -95,6 +113,14 @@ class BasicTextFields extends Component {
         <br />
         <TextField
           type="number"
+          label="Year"
+          variant="outlined"
+          name="Year"
+          onChange={this.updateState}
+        />
+        <br/>
+        <TextField
+          type="number"
           label="Stock"
           variant="outlined"
           name="Stock"
@@ -115,11 +141,12 @@ class BasicTextFields extends Component {
           <input
             type="file"
             style={{ display: "none" }}
-            name="Url"
-            onChange={this.updateState}
+            name="image"
+            onChange={this.uploadButtonClick}
+            accept="Image/*"
           />
         </Button>
-        <p className={classes.url}>{this.state.Url}</p>
+        <p className={classes.url}>{this.state.imgName}</p>
         <Button
           className={classes.addBook}
           variant="contained"
@@ -134,4 +161,3 @@ class BasicTextFields extends Component {
 }
 
 export default withStyles(useStyles)(BasicTextFields);
- 

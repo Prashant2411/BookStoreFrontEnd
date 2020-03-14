@@ -5,6 +5,7 @@ import AddBook from './components/AddBook'
 function App() {
   return (
     <div>
+      <AddBook/>
     </div>
   );
 }
