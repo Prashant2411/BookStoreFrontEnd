@@ -59,6 +59,7 @@ const styles = theme => ({
     }
 });
 
+
 class ControlledExpansionPanels extends React.Component {
     state = {
         Name: "",
@@ -72,6 +73,40 @@ class ControlledExpansionPanels extends React.Component {
         expanded: 'panel1',
     };
 
+    validate = (e) => {
+        const regexp = /[A-Za-z]{3,20}/;
+        const char=e.target.value;
+        if(!regexp.test(char)){
+            alert('Invalid Data')
+            this.setState({
+                [e.target.name]:""
+            })
+        }
+    }
+
+    validatePhoneNumbeer=(e)=>{
+        const regexp1 = /[5-9]\d{9}$/
+        const char=e.target.value;
+        if(!regexp1.test(char)){
+            alert('Invalid Data')
+            this.setState({
+                [e.target.name]:""
+            })
+        }
+    }
+
+    validatePinCode=(e)=>{
+        const regexp2 = /^[1-9]\d{5}$/
+        const char=e.target.value;
+        if(!regexp2.test(char)){
+            alert('Invalid Data')
+            this.setState({
+                [e.target.name]:""
+            })
+        }
+    }
+
+    eqweq
     openPanel = panel => (event, expanded) => {
         this.setState({
             expanded: expanded ? panel : false,
@@ -95,6 +130,7 @@ class ControlledExpansionPanels extends React.Component {
         await this.setState({Type: event.target.value});
     };
 
+    
     render() {
         const {classes} = this.props;
         const {expanded} = this.state;
@@ -110,9 +146,12 @@ class ControlledExpansionPanels extends React.Component {
                         <form onSubmit={this.buttonPressed} validate>
                             <TextField
                                 label="Name"
+                                type="text"
                                 className={classes.textField}
+                                value={this.state.Name}
                                 name="Name"
                                 id="customerDetails"
+                                onBlur={this.validate}
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
@@ -120,9 +159,11 @@ class ControlledExpansionPanels extends React.Component {
                             />
                             <TextField
                                 label="Phone Number"
-                                type="number"
+                                type="text"
                                 name="PhoneNumber"
                                 id="customerDetails1"
+                                value={this.state.PhoneNumber}
+                                onBlur={this.validatePhoneNumbeer}
                                 onChange={this.updateState}
                                 className={classes.textField}
                                 margin="normal"
@@ -132,9 +173,11 @@ class ControlledExpansionPanels extends React.Component {
                             <br/>
                             <TextField
                                 label="Pincode"
-                                type="number"
+                                type="text"
                                 id="customerDetails2"
                                 name="Pincode"
+                                value={this.state.Pincode}
+                                onBlur={this.validatePinCode}
                                 onChange={this.updateState}
                                 className={classes.textField}
                                 margin="normal"
@@ -146,6 +189,8 @@ class ControlledExpansionPanels extends React.Component {
                                 className={classes.textField}
                                 id="customerDetails3"
                                 name="Locality"
+                                value={this.state.Locality}
+                                onBlur={this.validate}
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
@@ -169,6 +214,8 @@ class ControlledExpansionPanels extends React.Component {
                                 id="customerDetails5"
                                 className={classes.textField}
                                 name="City"
+                                value={this.state.City}
+                                onBlur={this.validate}
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
@@ -179,6 +226,8 @@ class ControlledExpansionPanels extends React.Component {
                                 className={classes.textField}
                                 name="Town"
                                 id="customerDetails6"
+                                value={this.state.Town}
+                                onBlur={this.validate}
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
