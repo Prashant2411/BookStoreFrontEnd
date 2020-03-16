@@ -48,13 +48,14 @@ const styles = theme => ({
         margin: `${theme.spacing.unit}px 0`,
     },
     button: {
-        margin: "0 0 0 110%"
+        margin: "0 0 0 95%"
     },
     edit: {
         paddingTop: "0.5%",
         marginLeft: "60%",
         fontSize: "80%",
-        display: 'none '
+        display: 'none ',
+        cursor: "pointer"
     }
 });
 
@@ -68,7 +69,7 @@ class ControlledExpansionPanels extends React.Component {
         City: "",
         Town: "",
         Type: "",
-        expanded: null,
+        expanded: 'panel1',
     };
 
     openPanel = panel => (event, expanded) => {
@@ -78,17 +79,12 @@ class ControlledExpansionPanels extends React.Component {
     };
 
     buttonPressed = () => {
-        ids.map(values => {
-            document.getElementById(values).disabled = true
-        })
+        ids.map(values => document.getElementById(values).disabled = true)
         document.getElementById("edit").style.display = 'block'
     }
 
     editDetails = () => {
-        ids.map(values => {
-            document.getElementById(values).disabled = false
-        })
-        document.getElementById("edit").style.display = 'none'
+        ids.map(values => document.getElementById(values).disabled = false)
     }
 
     updateState = event => {
@@ -111,7 +107,7 @@ class ControlledExpansionPanels extends React.Component {
                         <label className={classes.edit} id="edit" onClick={this.editDetails}>Edit</label>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <form>
+                        <form onSubmit={this.buttonPressed} validate>
                             <TextField
                                 label="Name"
                                 className={classes.textField}
@@ -120,6 +116,7 @@ class ControlledExpansionPanels extends React.Component {
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
+                                required
                             />
                             <TextField
                                 label="Phone Number"
@@ -130,6 +127,7 @@ class ControlledExpansionPanels extends React.Component {
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
+                                required
                             />
                             <br/>
                             <TextField
@@ -141,6 +139,7 @@ class ControlledExpansionPanels extends React.Component {
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
+                                required
                             />
                             <TextField
                                 label="Locality"
@@ -150,17 +149,20 @@ class ControlledExpansionPanels extends React.Component {
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
+                                required
                             />
                             <br/>
                             <TextareaAutosize className={classes.textarea}
-                                              aria-label="Address"
+                                              arial-label="Address"
                                               rowsMin={4}
                                               id="customerDetails4"
                                               name="Address"
                                               onChange={this.updateState}
                                               rowsMax={4}
-                                              placeholder="Address"
-                            />
+                                              placeholder="Address*"
+                                              variant="outlined"
+                                              required
+                                              />
                             <br/>
                             <TextField
                                 label="City"
@@ -170,6 +172,7 @@ class ControlledExpansionPanels extends React.Component {
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
+                                required
                             />
                             <TextField
                                 label="Town"
@@ -179,6 +182,7 @@ class ControlledExpansionPanels extends React.Component {
                                 onChange={this.updateState}
                                 margin="normal"
                                 variant="outlined"
+                                required
                             />
                             <br/>
                             <FormLabel className={classes.addressType}>Type</FormLabel>
@@ -198,8 +202,7 @@ class ControlledExpansionPanels extends React.Component {
                                                   control={<Radio color="primary" id="customerDetails9"/>}
                                                   label="Other"/>
                             </RadioGroup>
-                            <Button className={classes.button} variant="contained"
-                                    onClick={this.buttonPressed}>Continue</Button>
+                            <Button type="submit" className={classes.button} variant="contained">Continue</Button>
                         </form>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
