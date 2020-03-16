@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 
 const useStyles = makeStyles(theme => ({
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   title: {
     display: "none",
@@ -85,7 +85,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor: "rgb(145,10,10)"}}>
         <Toolbar>
           <MenuBookIcon className={classes.bookIcon} />
           <Typography className={classes.title} variant="h6" noWrap>
