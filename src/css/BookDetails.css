@@ -1,0 +1,154 @@
+.listDiv{
+    max-width: 1024px;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: auto;
+    
+}
+
+.bookDiv{
+    width: 200px;
+    border: 2px solid black;
+    margin: 2%;
+    background-color: rgb(238, 236, 236);
+    border-radius: 5px;
+}
+
+.bookDiv:hover{
+    width: 200px;
+    border: 2px solid black;
+    margin: 2%;
+    background-color: rgb(238, 236, 236);
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px 6px grey;
+}  
+
+.bookImage{
+    position: absolute;
+    height: 175px;
+    width: 125px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.imageDiv{
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 175px;
+    width: 125px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.bookProperty{
+    width: 86%;
+    padding: 2% 7%;
+    margin: 0;
+    background-color: white;
+}
+
+.titleFont{
+    font-family: 'Roboto';
+    font-size: 14px;
+    margin: 5px 0 0 0;
+    line-height: 0;
+    padding-bottom: 0px;
+    display: inline-block;
+}
+
+.authorFont{
+    font-family: 'Roboto';
+    font-size: 10px;
+    margin: 0;
+    padding-top: 5px;
+    line-height: 0;
+    color: rgb(119, 119, 119);
+}
+
+.priceFont{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 14px;
+    margin: 5px 0 0 0;
+    padding-bottom: 8px;
+    line-height: 0;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+.bookDivButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+}
+
+.bookButton {
+    width: 45%;
+    background-color: rgb(24,12, 196); /* Green */
+    border: none;
+    color: white;
+    padding: 2% 1%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 70%;
+    margin: 10px 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .bookButton:hover {
+    background-color: rgb(11, 4, 110);
+    color: white;
+  }
+
+  .outOfStock{
+  position: absolute;
+  background-color: white;
+  width: 170px;
+  height: 30px;
+  padding-top: 10px;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 3px  3px grey;
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    font-family: 'Roboto';
+    font-size: 13px;
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin-left: 200px;
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .bookDetailsH{
+      padding: 0px;
+      margin: 0px;
+      line-height: 0.5;
+  }
