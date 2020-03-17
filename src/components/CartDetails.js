@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 export class CartDetails extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             bookBunch: [{
                 bookName: "Few thing left unsaid",
@@ -17,13 +16,14 @@ export class CartDetails extends Component {
                 bookName: "Part of life",
                 authorName: "Sudeep Nagarkar",
                 bookPrice: 1500,
-                noOfCopies: 1,
+                noOfCopies: 5,
             }],
             cartBooks: 0,
-            cartSubTotal: 0
+            cartSubTotal: 0,
         }
         this.parentComponent = React.createRef()
     }
+
     UNSAFE_componentWillMount = async () => {
         await this.setState({ cartBooks: this.state.bookBunch.length })
 
@@ -47,6 +47,11 @@ export class CartDetails extends Component {
         this.setState({ cartSubTotal: this.state.cartSubTotal + newValue - prevValue })
     }
 
+    handleExpantion = () =>{
+        document.getElementById('placeOrderButton').style.display = 'none'
+        this.props.handleExpantion()
+    }
+
     render() {
         return (
             <div className="cartDetailsDiv">
@@ -54,16 +59,16 @@ export class CartDetails extends Component {
                 {(this.state.bookBunch.length > 0) ?
                     this.state.bookBunch.map((value) => {
                         return (
-                            <CartBook key={value.bookName + value.bookName} param={value}
+                            <CartBook key={value.id} param={value}
                                 removeBook={this.removeBook} updateQuantity={this.updateQuantity}
                                 updateCartSubtotal={this.updateCartSubtotal} />
                         );
                     }
                     ) : <h3>Your cart is empty</h3>}
                 <h3 className="subTotal">SubTotal : {this.state.cartSubTotal}</h3>
-                {(this.state.bookBunch.length > 0) ? <Button variant="contained" className="placeOrderButton" color="primary" disableElevation>
+                {(this.state.bookBunch.length > 0) ? <Button onClick={this.handleExpantion} id="placeOrderButton" variant="contained" className="placeOrderButton" color="primary" >
                     PLACE ORDER
-                </Button> : <h6> </h6>}
+                </Button>: <h6> </h6>}
             </div>
         )
     }
