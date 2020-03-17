@@ -134,7 +134,7 @@ class BasicTextFields extends Component {
     return (
       <Fragment>
       <div className={classes.grow}>
-      <AppBar position="static" style={{backgroundColor: "rgb(145,10,10)"}}>
+      <AppBar position="static" style={{backgroundColor: "#990033"}}>
         <Toolbar>
           <MenuBookIcon className={classes.bookIcon} />
           <Typography className={classes.title} variant="h6" noWrap>
