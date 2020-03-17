@@ -1,17 +1,17 @@
 .listDiv{
-    max-width: 1024px;
     display: flex;
     flex-direction: row;
-    align-content: space-between;
+    align-content: space-around;
     flex-flow: row wrap;
     justify-content: center;
-    margin: auto;
-    
+    /* border: 1px solid black; */
+    margin: 0 0 0 10%;
+    width: 80%
 }
 
 .bookDiv{
     width: 200px;
-    border: 2px solid black;
+    border: 2px solid #E8E8E8;
     margin: 2%;
     background-color: rgb(238, 236, 236);
     border-radius: 5px;
@@ -19,7 +19,7 @@
 
 .bookDiv:hover{
     width: 200px;
-    border: 2px solid black;
+    border: 2px solid #E8E8E8;
     margin: 2%;
     background-color: rgb(238, 236, 236);
     border-radius: 5px;
@@ -43,6 +43,7 @@
     border: 1px solid black;
     display: flex;
     justify-content: center;
+    cursor: default;
 }
 
 .bookProperty{

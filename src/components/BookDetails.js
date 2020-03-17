@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import '../css/BookDetails.css'
-import success from '../css/1.jpg'
 import InStock from './InStock'
 import OutOfStock from './OutOfStock'
+import Tooltip from '@material-ui/core/Tooltip'
 
-export class BookDetails extends Component {
+export class 
+BookDetails extends Component {
     constructor(props) {
         super(props)
 
@@ -14,27 +15,27 @@ export class BookDetails extends Component {
             bookPrice: 0,
             bookDetails: '',
             imageSrc: '',
-            stock: this.props.stock,
+            stock: this.props.bookList.noOfCopies,
         }
     }
-
 
     render() {
 
         return (
-            <div className="bookDiv tooltip">
-                <span class="tooltiptext"><h2 className="bookDetailsH">Book Details</h2><br/>{this.props.bookDetails}</span>
+            <div className="bookDiv ">
+                <Tooltip disableFocusListener disableTouchListener title={this.props.bookList.bookDetail}>
                 <div className="imageDiv">
-                    <img className="bookImage" src={success} alt="no Cover"/>
-                    {(this.state.stock === "0")
+                    <img className="bookImage" src={this.props.bookList.bookImageSrc} alt="no Cover"/>
+                    {(this.state.stock === 0)
                         ? <h3 className="outOfStock">Out Of Stock</h3>
-                        : <h1></h1>
+                        : <h1> </h1>
                     }
                 </div>
+                </Tooltip>
                 <div className="bookProperty">
-                    <p className="titleFont">{this.props.bookTitle}</p><br />
-                    <p className="authorFont">{this.props.autherName}</p><br />
-                <p className="priceFont">Rs.{this.props.bookPrice }</p>
+                    <p className="titleFont">{this.props.bookList.bookName}</p><br />
+                    <p className="authorFont">{this.props.bookList.authorName}</p><br />
+                <p className="priceFont">Rs.{this.props.bookList.bookPrice }</p>
                 </div> 
                 <div className="bookDivButton">
                     {(this.state.stock > 0)

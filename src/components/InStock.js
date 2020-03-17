@@ -5,8 +5,8 @@ function InStock() {
     return (
         <React.Fragment>
                 <div className="bookDivButton">
-                    <button class="bookButton bookButton1">Add To Bag</button>
-                    <button class="bookButton bookButton1">Whish List</button>
+                    <button className="bookButton bookButton1">Add To Bag</button>
+                    <button className="bookButton bookButton1">Wish List</button>
                 </div>    
         </React.Fragment>
     )
