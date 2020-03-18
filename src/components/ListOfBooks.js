@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import BookDetails from './BookDetails'
 import '../css/BookDetails.css'
-import { getBookList } from '../Configuration/BookConfig'
+import { getBookList,getBooksCount } from '../Configuration/BookConfig'
+import BookStorePagination from './BookStorePagination';
 
 export class ListOfBooks extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            bookList: []
+            bookList: [],
+            search:'',
+            noOfRecord:0
         }
     }
 
@@ -22,8 +25,17 @@ export class ListOfBooks extends Component {
 
     UNSAFE_componentWillMount() {
         this.getBookLists();
+        this.totalItems();
     }
-    
+
+    totalItems = async () =>{
+        await getBooksCount(this.state.search).then((res)=>{
+            this.setState({noOfRecord:res.data})
+            console.log(this.state.noOfRecord);
+            
+        })
+    }
+
     render() {        
         const books = this.state.bookList.map((value, index) => {
             return(
@@ -34,6 +46,7 @@ export class ListOfBooks extends Component {
         return (
             <div className="listDiv">
                 {books}
+                <BookStorePagination pageNo={this.state.noOfRecord/12}/>
             </div>
         )
     }
