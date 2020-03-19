@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import BookDetails from './BookDetails'
 import '../css/BookDetails.css'
 import { getBookList,getBooksCount } from '../Configuration/BookConfig'
-import DropDownList from './DropDownLIst'
+import DropDownList from './DropDownList'
 
 export class ListOfBooks extends Component {
     constructor(props) {
@@ -46,6 +46,7 @@ export class ListOfBooks extends Component {
         return (
             <div className="listDiv">
                 <DropDownList/>
+                <br></br>
                 {books}
             </div>
         )
