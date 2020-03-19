@@ -43,22 +43,22 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color:"rgb(184,184,184)",
-    zIndex:1
+    color: "rgb(184,184,184)",
+    zIndex: 1
   },
   // inputRoot: {
-    // color: "inherit"
+  // color: "inherit"
   // },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: 400 
+      width: 400
     },
-    opacity:1,
-    backgroundColor:"white",
-    borderRadius:"4px"
+    opacity: 1,
+    backgroundColor: "white",
+    borderRadius: "4px"
   },
   sectionDesktop: {
     display: "none",
@@ -83,14 +83,15 @@ const useStyles = makeStyles(theme => ({
   cartIcon: {
     padding: "0 0 0 15%"
   },
-  appBar:{
-      backgroundColor:"#990033",
+  appBar: {
+    backgroundColor: "#990033",
   }
 }));
 
-export default function PrimarySearchAppBar() {
-  const classes = useStyles();
 
+export default function PrimarySearchAppBar(func) {
+  const classes = useStyles();
+ 
   return (
     <div className={classes.grow}>
       <AppBar position="static" className={classes.appBar}>

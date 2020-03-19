@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import BookDetails from './BookDetails'
 import '../css/BookDetails.css'
-import { getBookList,getBooksCount } from '../Configuration/BookConfig'
-import BookStorePagination from './BookStorePagination';
+import { getBookList, getBooksCount ,getSearchedBooks} from '../Configuration/BookConfig'
+import Pagination from '@material-ui/lab/Pagination';
 
 export class ListOfBooks extends Component {
     constructor(props) {
@@ -10,13 +10,14 @@ export class ListOfBooks extends Component {
 
         this.state = {
             bookList: [],
-            search:'',
-            noOfRecord:0
+            search: '',
+            noOfRecord: 0,
+            page: 1
         }
     }
 
-    getBookLists =()=> {
-        getBookList().then(res => {
+    getBookLists = () => {
+        getBookList(this.state.page).then(res => {
             this.setState({ bookList: res.data })
         }).catch(err => {
             console.log(err);
@@ -28,25 +29,32 @@ export class ListOfBooks extends Component {
         this.totalItems();
     }
 
-    totalItems = async () =>{
-        await getBooksCount(this.state.search).then((res)=>{
-            this.setState({noOfRecord:res.data})
+    totalItems = async () => {
+        await getBooksCount(this.state.search).then((res) => {
+            this.setState({ noOfRecord: res.data })
             console.log(this.state.noOfRecord);
-            
+
         })
     }
 
-    render() {        
+  
+    handleChange = async (event, value) => {
+        console.log(value);
+        await this.setState({ page: value });
+        this.getBookLists()
+    };
+
+    render() {
         const books = this.state.bookList.map((value, index) => {
-            return(
-            <BookDetails key={value.id} bookList={value}/>
+            return (
+                <BookDetails key={value.id} bookList={value} />
             )
         })
 
         return (
             <div className="listDiv">
                 {books}
-                <BookStorePagination pageNo={this.state.noOfRecord/12}/>
+                <Pagination shape="rounded" className="pagination" count={Math.ceil(this.state.noOfRecord / 12)} page={this.state.page} onChange={this.handleChange} />
             </div>
         )
     }

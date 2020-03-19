@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-export function getBookList(){
+export function getBookList(pageNo){
     return axios({
         method: 'get',
-        url:'http://localhost:8080/bookstore/allbooks/1'
+        url:"http://localhost:8080/bookstore/allbooks/"+pageNo
     })
 }
 
