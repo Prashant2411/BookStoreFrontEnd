@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import BookDetails from './BookDetails'
 import '../css/BookDetails.css'
 import { getBookList,getBooksCount } from '../Configuration/BookConfig'
-import BookStorePagination from './BookStorePagination';
+import DropDownList from './DropDownLIst'
 
 export class ListOfBooks extends Component {
     constructor(props) {
@@ -45,8 +45,8 @@ export class ListOfBooks extends Component {
 
         return (
             <div className="listDiv">
+                <DropDownList/>
                 {books}
-                <BookStorePagination pageNo={this.state.noOfRecord/12}/>
             </div>
         )
     }
