@@ -9,7 +9,6 @@ export class ListOfBooks extends Component {
 
         this.state = {
             noOfRecord: 0,
-            page: 1
         }
     }
 
@@ -23,7 +22,8 @@ export class ListOfBooks extends Component {
         return (
             <div className="listDiv">
                 {books}
-                <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)} page={this.state.page} onChange={this.props.handleChange} />
+                <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)} 
+                     onChange={this.props.handleChange} />
             </div>
         )
     }
