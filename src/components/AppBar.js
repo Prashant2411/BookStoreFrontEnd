@@ -1,5 +1,5 @@
-import React from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import React, { Component } from "react";
+import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -8,7 +8,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import MenuBookIcon from "@material-ui/icons/MenuBookSharp";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
   grow: {
     flexGrow: 1,
   },
@@ -46,9 +46,6 @@ const useStyles = makeStyles(theme => ({
     color: "rgb(184,184,184)",
     zIndex: 1
   },
-  // inputRoot: {
-  // color: "inherit"
-  // },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create("width"),
@@ -86,11 +83,13 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     backgroundColor: "#990033",
   }
-}));
+})
 
 
-export default function PrimarySearchAppBar(func) {
-  const classes = useStyles();
+class PrimarySearchAppBar extends Component {
+
+  render() {
+  const { classes } = this.props
  
   return (
     <div className={classes.grow}>
@@ -118,5 +117,7 @@ export default function PrimarySearchAppBar(func) {
         </Toolbar>
       </AppBar>
     </div>
-  );
+  );}
 }
+
+export default withStyles(useStyles)(PrimarySearchAppBar)
