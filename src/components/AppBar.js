@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
+import { fade, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 
 const useStyles = theme => ({
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   title: {
     display: "none",
@@ -81,43 +81,55 @@ const useStyles = theme => ({
     padding: "0 0 0 15%"
   },
   appBar: {
-    backgroundColor: "#990033",
+    backgroundColor: "#990033"
   }
-})
-
+});
 
 class PrimarySearchAppBar extends Component {
+  state = {
+    searchKey: ""
+  };
+
+  searchData = async event => {
+    if (event.target.value !== "") {
+      this.props.searchBookList(event.target.value)  
+    }
+    else if (event.target.value === "") {
+        this.props.bookList();
+    }
+  }
 
   render() {
-  const { classes } = this.props
- 
-  return (
-    <div className={classes.grow}>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <MenuBookIcon className={classes.bookIcon} />
-          <Typography className={classes.title} variant="h6" noWrap>
-            BookStore
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+    const { classes } = this.props;
+    return (
+      <div className={classes.grow}>
+        <AppBar position="static" className={classes.appBar}>
+          <Toolbar>
+            <MenuBookIcon className={classes.bookIcon} />
+            <Typography className={classes.title} variant="h6" noWrap>
+              BookStore
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                onChange={this.searchData}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-          <ShoppingCartIcon className={classes.cartIcon} />
-          <div className={classes.grow} />
-        </Toolbar>
-      </AppBar>
-    </div>
-  );}
+            <ShoppingCartIcon className={classes.cartIcon} />
+            <div className={classes.grow} />
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-export default withStyles(useStyles)(PrimarySearchAppBar)
+export default withStyles(useStyles)(PrimarySearchAppBar);
