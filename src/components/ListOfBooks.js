@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BookDetails from './BookDetails'
 import '../css/BookDetails.css'
 import Pagination from '@material-ui/lab/Pagination';
+import DropDownList from './DropDownList';
 
 export class ListOfBooks extends Component {
     constructor(props) {
@@ -21,6 +22,10 @@ export class ListOfBooks extends Component {
 
         return (
             <div className="listDiv">
+                <div className="bookItemsDiv">
+                <h2 className="bookH2">Books <span className="priceFont" style={{color:"gray"}}> ({this.props.noOfRecord} Items)</span></h2>
+                <DropDownList/>
+                </div>
                 {books}
                 <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)} 
                      onChange={this.props.handleChange} />

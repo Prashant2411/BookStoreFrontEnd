@@ -4,10 +4,10 @@
     align-content: space-around;
     flex-flow: row wrap;
     justify-content: center;
-    /* border: 1px solid black; */
     margin: 0 0 0 10%;
     width: 80%;
     padding-top: 70px;
+    padding-bottom: 60px;
 }
 
 .bookDiv{
@@ -158,9 +158,34 @@
   .pagination{
     display: inline-block;
     position: fixed;
-    bottom: 0em;
+    bottom: 45px;
   }
 
-  .instockbutton{
-      color: palegoldenrod;
-  }
+ @media only screen and (max-width: 600px) {
+ .bookItemsDiv{
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     width: 100%;
+ }
+}
+
+@media only screen and (min-width: 600px) {
+    .bookItemsDiv{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #990033;
+    color: white;
+    text-align: center;
+    font-size: 80%;
+ }

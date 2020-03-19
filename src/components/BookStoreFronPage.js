@@ -4,6 +4,7 @@ import AppBar from '../components/AppBar'
 import { getBookList, getBooksCount} from '../Configuration/BookConfig'
 import getSearchedBooks from "../Configuration/Search";
 import Styles from '../css/snackbar.module.css'
+import Footer from './Footer'
 
 class BookStoreFronPage extends Component {
 
@@ -33,7 +34,6 @@ class BookStoreFronPage extends Component {
     totalItems = async (attribute) => {
         await getBooksCount(attribute).then((res) => {
             this.setState({ noOfRecord: res.data })
-            console.log(this.state.noOfRecord,"item cout");
         })
     }
 
@@ -70,6 +70,7 @@ class BookStoreFronPage extends Component {
                 <div className={this.state.isActive ? [Styles.snackbar, Styles.show].join(" ") : Styles.snackbar}>
                     {this.state.status}
                 </div>
+                <Footer/>
             </div>
         )
     }

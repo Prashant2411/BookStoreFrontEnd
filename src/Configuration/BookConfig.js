@@ -20,3 +20,11 @@ export function getBooksCount(attribute){
         url: "http://localhost:8080/bookstore/bookcount/"+attribute
     })
 }
+
+export function getSortAttribute() {
+    return axios({
+        method: "get",
+        url: "http://localhost:8080/bookstore/sortattribute"
+    })
+}
+
