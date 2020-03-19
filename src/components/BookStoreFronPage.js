@@ -3,6 +3,7 @@ import ListOfBooks from '../components/ListOfBooks';
 import AppBar from '../components/AppBar'
 import { getBookList, getBooksCount} from '../Configuration/BookConfig'
 import getSearchedBooks from "../Configuration/Search";
+import Styles from '../css/snackbar.module.css'
 
 class BookStoreFronPage extends Component {
 
@@ -10,7 +11,9 @@ class BookStoreFronPage extends Component {
         bookList: [],
         searchKey:"",
         noOfRecord: 0,
-        page: 1
+        page: 1,
+        status: "",
+        isActive: false
     }
 
     getBookLists = () => {
@@ -29,7 +32,7 @@ class BookStoreFronPage extends Component {
     totalItems = async (attribute) => {
         await getBooksCount(attribute).then((res) => {
             this.setState({ noOfRecord: res.data })
-            console.log(this.state.noOfRecord);
+            console.log(this.state.noOfRecord,"item cout");
         })
     }
 
@@ -40,9 +43,21 @@ class BookStoreFronPage extends Component {
 
     getSearchedBookList = async (attribute) => {
         await getSearchedBooks(attribute).then(res => {
+            
             this.setState({bookList: res.data})
+            }).catch((err)=>{
+               console.log(err,"eee")
+                this.setState({ status: "NO RECORD FOUND"});
+                this.openSnackBar()
         });
         await this.totalItems(attribute);
+    }
+    openSnackBar = () => {
+        this.setState({ isActive: true }, () => {
+            setTimeout(() => {
+                this.setState({ isActive: false });
+            }, 3000);
+        });
     }
     
     render() {
@@ -50,6 +65,9 @@ class BookStoreFronPage extends Component {
             <div>
                 <AppBar searchBookList={this.getSearchedBookList} bookList={this.getBookLists}/>
                 <ListOfBooks bookList={this.state.bookList} handleChange={this.handleChange} noOfRecord={this.state.noOfRecord}/>
+                <div className={this.state.isActive ? [Styles.snackbar, Styles.show].join(" ") : Styles.snackbar}>
+                    {this.state.status}
+                </div>
             </div>
         )
     }
