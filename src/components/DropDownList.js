@@ -1,21 +1,25 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import Select from '@material-ui/core/Select';
 import { getSortAttribute } from '../Configuration/BookConfig';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    background:"white"
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 125,
-    marginLeft: "76%",
+    minWidth: 175,
+    marginLeft: "68%",
+    background:"white"
   },
   selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit ,
+    height:'30px'
   },
 });
 
@@ -27,7 +31,7 @@ class NativeSelects extends React.Component {
     sortBy: []
   };
 
-  componentWillMount(){
+  componentWillMount() {
 
     getSortAttribute().then(res => {
       this.setState({
@@ -46,19 +50,22 @@ class NativeSelects extends React.Component {
     const { classes } = this.props;
 
     return (
-      <FormControl className={classes.formControl}>
-        <NativeSelect
+      <FormControl variant="outlined" className={classes.formControl}>
+         <InputLabel id="SortByRelevance">Sort By Relevance</InputLabel>
+        <Select
+          labelId="SortByRelevance"
           value={this.state.age}
           onChange={this.handleChange('sort')}
           name="sort"
           className={classes.selectEmpty}
+          label="Sort By Relevance"
         >
           {
             this.state.sortBy.map(values => {
               return <option value={values}>{values}</option>
             })
           }
-        </NativeSelect>
+        </Select>
       </FormControl>
     );
   }
