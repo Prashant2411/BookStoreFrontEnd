@@ -81,7 +81,8 @@ const useStyles = theme => ({
     padding: "0 0 0 15%"
   },
   appBar: {
-    backgroundColor: "#990033"
+    backgroundColor: "#990033",
+    position:"fixed",
   }
 });
 

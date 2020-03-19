@@ -6,7 +6,8 @@
     justify-content: center;
     /* border: 1px solid black; */
     margin: 0 0 0 10%;
-    width: 80%
+    width: 80%;
+    padding-top: 70px;
 }
 
 .bookDiv{
@@ -85,7 +86,7 @@
 .bookDivButton{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 100%;
     background-color: white;
 }
@@ -158,4 +159,8 @@
     display: inline-block;
     position: fixed;
     bottom: 0em;
+  }
+
+  .instockbutton{
+      color: palegoldenrod;
   }
