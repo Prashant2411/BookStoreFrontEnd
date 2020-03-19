@@ -57,7 +57,7 @@ const styles = theme => ({
     paddingBottom: 0
   },
   group: {
-    margin: `${theme.spacing.unit}px 0`
+    margin: `${theme.spacing(1)}px 0`
   },
   button: {
     margin: "0 0 0 60%",
@@ -78,7 +78,6 @@ const styles = theme => ({
 });
 
 class ControlledExpansionPanels extends React.Component {
-
   state = {
     Name: "",
     PhoneNumber: "",
@@ -88,7 +87,8 @@ class ControlledExpansionPanels extends React.Component {
     City: "",
     Town: "",
     Type: "",
-    expanded: false
+    expanded: false,
+    formValid: true
   };
 
   validate = e => {
@@ -100,12 +100,6 @@ class ControlledExpansionPanels extends React.Component {
         [e.target.name]: ""
       });
     }
-  };
-
-  openPanel = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    });
   };
 
   validatePhoneNumbeer = e => {
@@ -120,10 +114,10 @@ class ControlledExpansionPanels extends React.Component {
   };
 
   validatePinCode = e => {
-    const regexp2 = /^[1-9]\d{5}$/;
+    const regexp2 = /[1-9]\d{5}$/;
     const char = e.target.value;
     if (!regexp2.test(char)) {
-      document.getElementById(e.target.id).style.border = "red"  
+      document.getElementById(e.target.id).style.border = "red";
       alert("Invalid Data");
       this.setState({
         [e.target.name]: ""
@@ -131,39 +125,71 @@ class ControlledExpansionPanels extends React.Component {
     }
   };
 
-  buttonPressed = () => {
+  validateRadioButton = async () => {
+    if (
+      document.getElementById("customerDetails7").checked === true ||
+      document.getElementById("customerDetails8").checked === true ||
+      document.getElementById("customerDetails9").checked === true
+    ) {
+      return null;
+    }
+    await this.setState({ formValid: false });
+  };
+
+  buttonPressed = async event => {
+    this.setState({ formValid:true })
+    await ids
+      .filter(value => {
+        if (
+          value === "customerDetails9" ||
+          value === "customerDetails8" ||
+          value === "customerDetails7"
+        ) {
+          
+          return false;
+        }
+        return true;
+      }).map(value =>
+      document.getElementById(value).checkValidity() === false
+        ? this.setState({ formValid : false })
+        : null,
+    );
+    await this.validateRadioButton();
+    if (this.state.formValid === false) {
+      alert("Invalid Data");
+      return this.state.formValid;
+    }
     ids.map(values => (document.getElementById(values).disabled = true));
     document.getElementById("edit").style.display = "block";
+    document.getElementById("onSumbit").style.display = "none";
+    this.props.handleExpantion("expanded2");
   };
 
   editDetails = () => {
     ids.map(values => (document.getElementById(values).disabled = false));
+    document.getElementById("edit").style.display = "none";
+    document.getElementById("onSumbit").style.display = "none";
   };
 
   updateState = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  type = async event => {
-    await this.setState({ Type: event.target.value });
-  };
-
   render() {
     const { classes } = this.props;
 
     return (
-      <ExpansionPanel
-        className={classes.root}
-        expanded={this.props.expanded}
-      >
+      <ExpansionPanel className={classes.root} expanded={this.props.expanded}>
         <ExpansionPanelSummary>
-          <Typography className={classes.heading}><b>Customer Details</b></Typography>
+          <Typography className={classes.heading}>
+            <b>Customer Details</b>
+          </Typography>
           <label className={classes.edit} id="edit" onClick={this.editDetails}>
             Edit
           </label>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <form onSubmit={this.buttonPressed} className={classes.form} validate>
+          <form className={classes.form}>
             <TextField
               label="Name"
               type="text"
@@ -191,7 +217,7 @@ class ControlledExpansionPanels extends React.Component {
               required
             />
             <br />
-            {/* <TextField
+            <TextField
               label="Pincode"
               type="text"
               id="customerDetails2"
@@ -253,15 +279,15 @@ class ControlledExpansionPanels extends React.Component {
               margin="normal"
               variant="outlined"
               required
-            /> */}
+            />
             <br />
             <FormLabel className={classes.addressType}>Type</FormLabel>
             <br />
             <RadioGroup
-              aria-label="Gender"
-              name="gender1"
+              aria-label="Type"
+              name="Type"
               className={classes.group}
-              onChange={this.type}
+              onChange={this.updateState}
               row
             >
               <FormControlLabel
@@ -284,10 +310,11 @@ class ControlledExpansionPanels extends React.Component {
               />
             </RadioGroup>
             <Button
-              type="submit"
               className={classes.button}
               variant="contained"
               color="primary"
+              id="onSumbit"
+              onClick={this.buttonPressed}
             >
               Continue
             </Button>

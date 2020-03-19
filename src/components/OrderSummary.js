@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import source from "../asserts/first.jpg";
 import { withStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -25,7 +25,7 @@ class OrderSummary extends React.Component {
     const { classes } = this.props;
 
     return (
-      <ExpansionPanel className={classes.root} expanded={this.props.expanded}>
+      <ExpansionPanel className={classes.root} expanded='true'>
         <ExpansionPanelSummary>
           <Typography className={classes.heading}>
             <b>OrderSummary</b>
@@ -45,6 +45,7 @@ class OrderSummary extends React.Component {
                 </div>
               ); 
             })}
+            <h4><b>Subtotal: {this.props.subTotal}</b></h4>
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
