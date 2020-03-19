@@ -22,6 +22,7 @@ class BookStoreFronPage extends Component {
         }).catch(err => {
             console.log(err);
         })
+        this.totalItems("");
     }
 
     UNSAFE_componentWillMount() {
@@ -43,7 +44,6 @@ class BookStoreFronPage extends Component {
 
     getSearchedBookList = async (attribute) => {
         await getSearchedBooks(attribute).then(res => {
-            
             this.setState({bookList: res.data})
             }).catch((err)=>{
                console.log(err,"eee")
@@ -52,6 +52,7 @@ class BookStoreFronPage extends Component {
         });
         await this.totalItems(attribute);
     }
+
     openSnackBar = () => {
         this.setState({ isActive: true }, () => {
             setTimeout(() => {
@@ -65,6 +66,7 @@ class BookStoreFronPage extends Component {
             <div>
                 <AppBar searchBookList={this.getSearchedBookList} bookList={this.getBookLists}/>
                 <ListOfBooks bookList={this.state.bookList} handleChange={this.handleChange} noOfRecord={this.state.noOfRecord}/>
+
                 <div className={this.state.isActive ? [Styles.snackbar, Styles.show].join(" ") : Styles.snackbar}>
                     {this.state.status}
                 </div>
