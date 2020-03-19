@@ -1,52 +1,59 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
-class SimpleMenu extends React.Component {
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2,
+  },
+});
+
+class NativeSelects extends React.Component {
   state = {
-    anchorEl: null,
-    sort: [
-      "Sort A", "Sort B", "Sort C"
+    sort: '',
+    name: 'hai',
+    labelWidth: 0,
+    sortBy: [
+      "Sort by Relevance",
+      "Price: High to Low",
+      "Price: Low to High",
+      "Latest Arrival"
     ]
   };
 
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
   };
 
   render() {
-    const { anchorEl } = this.state;
+    const { classes } = this.props;
 
     return (
-      <div>
-        <Button
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-                <br/>
-          Open Menu
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          {
-            this.state.sort.map( values => {
-              return <MenuItem onClick={this.handleClose}>{values}</MenuItem>
-            })
-          }
-        </Menu>
-      </div>
+        <FormControl className={classes.formControl}>
+          <NativeSelect
+            value={this.state.age}
+            onChange={this.handleChange('sort')}
+            name="sort"
+            className={classes.selectEmpty}
+          >
+            {
+              this.state.sortBy.map( values => {
+                return <option value={values}>{values}</option>
+              })
+            }
+          </NativeSelect>
+        </FormControl>
     );
   }
 }
 
-export default SimpleMenu;
+export default withStyles(styles)(NativeSelects);
