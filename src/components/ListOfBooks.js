@@ -42,9 +42,9 @@ export class ListOfBooks extends Component {
         return (
             <React.Fragment>
                     <div className={this.state.flag===1 ? "listDiv" : "hidden"}>
-                        <div className="bookItemsDiv hidden">
+                        <div className="bookItemsDiv">
                             <h2 className="bookH2">Books <span className="priceFont" style={{ color: "gray" }}> ({this.props.noOfRecord} Items)</span></h2>
-                            <DropDownList />
+                            <DropDownList sortData={this.props.sortData} />
                         </div>
                         {books}
                         <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)}
