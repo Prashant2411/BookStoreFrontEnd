@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { getSortAttribute } from '../Configuration/BookConfig';
+import { getSortAttribute,getSortedBookList } from '../Configuration/BookConfig';
 import InputLabel from '@material-ui/core/InputLabel';
 
 const styles = theme => ({
@@ -25,7 +25,7 @@ const styles = theme => ({
 
 class NativeSelects extends React.Component {
   state = {
-    sort: '',
+    sort: [],
     name: 'hai',
     labelWidth: 0,
     sortBy: []
@@ -42,9 +42,15 @@ class NativeSelects extends React.Component {
     })
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
+  handleChange = event => {
+    getSortedBookList(event.target.value)
+    .then(res=>{
+      this.setState({ sort: res.data})
+      console.log("sortedData===>",this.state.sort);
+    }).catch(err=>{
+      console.log(err);
+    })
+};
 
   render() {
     const { classes } = this.props;
@@ -55,7 +61,7 @@ class NativeSelects extends React.Component {
         <Select
           labelId="SortByRelevance"
           value={this.state.age}
-          onChange={this.handleChange('sort')}
+          onChange={this.handleChange}
           name="sort"
           className={classes.selectEmpty}
           label="Sort By Relevance"

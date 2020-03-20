@@ -28,3 +28,9 @@ export function getSortAttribute() {
     })
 }
 
+export function getSortedBookList(attribute){
+    return axios({
+        method: "get",
+        url: "http://localhost:8080/bookstore/sortattribute/"+attribute+"/"+1
+    })
+}
