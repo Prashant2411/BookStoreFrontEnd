@@ -24,7 +24,7 @@ function OutOfStock() {
     return (
         <React.Fragment>
             <div className="bookDivButton">
-            <StyledButton style={{background:"white",color:"black",border:"1px solid black",width:"170px"}}>Wish List</StyledButton>
+            <StyledButton style={{background:"white",color:"black",border:"1px solid black",width:"170px"}}>notify me</StyledButton>
             </div>
         </React.Fragment>
     )
