@@ -25,7 +25,7 @@ class OrderSummary extends React.Component {
     const { classes } = this.props;
 
     return (
-      <ExpansionPanel className={classes.root} expanded='true'>
+      <ExpansionPanel className={classes.root} expanded={this.props.expanded2}>
         <ExpansionPanelSummary>
           <Typography className={classes.heading}>
             <b>OrderSummary</b>

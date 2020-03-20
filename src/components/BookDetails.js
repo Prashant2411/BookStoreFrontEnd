@@ -19,6 +19,10 @@ BookDetails extends Component {
         }
     }
 
+    addToCart=()=>{
+        this.props.addToCart(this.props.bookList)
+    }
+
     render() {
 
         return (
@@ -39,7 +43,7 @@ BookDetails extends Component {
                 </div> 
                 <div className="bookDivButton">
                     {(this.state.stock > 0)
-                        ? <InStock />
+                        ? <InStock addToCart={this.addToCart} book={this.props.bookList}/>
                         : <OutOfStock />
                     }
                 </div>

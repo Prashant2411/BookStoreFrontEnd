@@ -7,6 +7,8 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuBookIcon from "@material-ui/icons/MenuBookSharp";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = theme => ({
   grow: {
@@ -78,13 +80,22 @@ const useStyles = theme => ({
     }
   },
   cartIcon: {
-    padding: "0 0 0 15%"
+    margin: "0 0 0 15%"
   },
   appBar: {
     backgroundColor: "#990033",
-    position:"fixed",
+    position: "fixed",
   }
 });
+
+const StyledBadge = withStyles(theme => ({
+  badge: {
+    right: -10,
+    top: 5,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 0 0 15%",
+  },
+}))(Badge);
 
 class PrimarySearchAppBar extends Component {
   state = {
@@ -93,10 +104,10 @@ class PrimarySearchAppBar extends Component {
 
   searchData = async event => {
     if (event.target.value !== "") {
-      this.props.searchBookList(event.target.value)  
+      this.props.searchBookList(event.target.value)
     }
     else if (event.target.value === "") {
-        this.props.bookList();
+      this.props.bookList();
     }
   }
 
@@ -124,7 +135,12 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <ShoppingCartIcon className={classes.cartIcon} />
+            {/* <ShoppingCartIcon className={classes.cartIcon} /> */}
+            <IconButton aria-label="cart" className={classes.cartIcon}>
+              <StyledBadge badgeContent={4} color="secondary">
+                <ShoppingCartIcon className={classes.cartIcon} />
+              </StyledBadge>
+            </IconButton>
             <div className={classes.grow} />
           </Toolbar>
         </AppBar>

@@ -21,12 +21,11 @@ const StyledButton = withStyles({
       textTransform: 'capitalize',
     },
   })(Button);
-function InStock() {
+function InStock(props) {
     return (
         <React.Fragment>
             <div className="bookDivButton">
-            <StyledButton style={{background:"#990033"}}>Add To Cart</StyledButton>
-                {/* <button className="bookButton bookButton1"></button> */}
+            <StyledButton style={{background:"#990033"}} onClick={props.addToCart}>Add To Cart</StyledButton>
                 <StyledButton style={{background:"white",color:"black",border:"1px solid black"}}>Wish List</StyledButton>
             </div>
         </React.Fragment>
