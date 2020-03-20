@@ -41,7 +41,6 @@ class NativeSelects extends React.Component {
       console.log(err);
     })
   }
-
   handleChange = event => {
     getSortedBookList(event.target.value)
     .then(res=>{
