@@ -5,6 +5,7 @@ import { getBookList, getBooksCount} from '../Configuration/BookConfig'
 import getSearchedBooks from "../Configuration/Search";
 import Styles from '../css/snackbar.module.css'
 import Footer from './Footer'
+import { getSortedBookList } from '../Configuration/BookConfig';
 
 class BookStoreFronPage extends Component {
 
@@ -25,6 +26,14 @@ class BookStoreFronPage extends Component {
     setFlag=(prop)=>{
         this.bookStoreFrontPaage.current.setFlag(prop)
     }
+
+    sortData = value => {
+        getSortedBookList(value)
+        .then(res=>{
+          this.setState({ bookList: res.data})
+        }).catch(err=>{
+        })
+    };
 
     getBookLists = () => {
         getBookList(this.state.page).then(res => {

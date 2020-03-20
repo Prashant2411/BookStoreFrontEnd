@@ -25,7 +25,6 @@ const styles = theme => ({
 
 class NativeSelects extends React.Component {
   state = {
-    sort: '',
     name: 'hai',
     labelWidth: 0,
     sortBy: []
@@ -42,9 +41,9 @@ class NativeSelects extends React.Component {
     })
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
+  sortData = event => {
+    this.props.sortData(event.target.value)
+  }
 
   render() {
     const { classes } = this.props;
@@ -55,7 +54,7 @@ class NativeSelects extends React.Component {
         <Select
           labelId="SortByRelevance"
           value={this.state.age}
-          onChange={this.handleChange('sort')}
+          onChange={this.sortData}
           name="sort"
           className={classes.selectEmpty}
           label="Sort By Relevance"
