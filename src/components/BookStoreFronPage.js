@@ -5,6 +5,7 @@ import { getBookList, getBooksCount} from '../Configuration/BookConfig'
 import getSearchedBooks from "../Configuration/Search";
 import Styles from '../css/snackbar.module.css'
 import Footer from './Footer'
+import { getSortedBookList } from '../Configuration/BookConfig';
 
 class BookStoreFronPage extends Component {
 
@@ -16,6 +17,14 @@ class BookStoreFronPage extends Component {
         status: "",
         isActive: false
     }
+
+    sortData = value => {
+        getSortedBookList(value)
+        .then(res=>{
+          this.setState({ bookList: res.data})
+        }).catch(err=>{
+        })
+    };
 
     getBookLists = () => {
         getBookList(this.state.page).then(res => {
@@ -65,7 +74,7 @@ class BookStoreFronPage extends Component {
         return (
             <div>
                 <AppBar searchBookList={this.getSearchedBookList} bookList={this.getBookLists}/>
-                <ListOfBooks bookList={this.state.bookList} handleChange={this.handleChange} noOfRecord={this.state.noOfRecord}/>
+                <ListOfBooks bookList={this.state.bookList} handleChange={this.handleChange} noOfRecord={this.state.noOfRecord} sortData={this.sortData}/>
 
                 <div className={this.state.isActive ? [Styles.snackbar, Styles.show].join(" ") : Styles.snackbar}>
                     {this.state.status}
