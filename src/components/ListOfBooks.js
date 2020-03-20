@@ -19,15 +19,11 @@ export class ListOfBooks extends Component {
     addToCart = (props) => {
         this.state.books.push(props)
         console.log(this.state.books)
-        this.parentRef.current.updateCartBooks(this.state.books)
+        this.parentRef.current.updateCartBooks(props,"add")
     }
 
     removeBookFromParent = (prop) => {
-        this.setState(prevState => ({
-          books: prevState.books.filter(el => el.bookName !== prop.bookName)
-        }));
-        this.parentRef.current.updateCartBooks(this.state.books)
-        console.log("hhhh")
+        this.state.books.pop(prop)
       };
 
     render() {

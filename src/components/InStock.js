@@ -18,7 +18,7 @@ const StyledButton = withStyles({
       width:"80px"
     },
     label: {
-      textTransform: 'capitalize',
+      textTransform: 'capitalize', 
     },
   })(Button);
 function InStock(props) {

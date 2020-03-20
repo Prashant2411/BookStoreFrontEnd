@@ -14,27 +14,25 @@ export class Cart extends Component {
       expanded: false,
       expanded2: false
     };
-    
   }
 
-  updateCartBooks=async(prop)=>{
-    await this.setState({bookBunch:prop})
-    console.log(this.state.bookBunch);
-    await this.UNSAFE_componentWillMount()
-  }
+  updateCartBooks = async (prop, a) => {
+      await this.state.bookBunch.push(prop);
+      await this.UNSAFE_omponentWillMount(prop.bookPrice);
+  };
 
   removeBook = prop => {
     this.setState(prevState => ({
       bookBunch: prevState.bookBunch.filter(el => el.bookName !== prop.bookName)
     }));
-    this.props.removeBookFromParent(prop)
+    this.props.removeBookFromParent(prop);
   };
 
   updateCartSubtotal = (prevValue, newValue) => {
     this.setState({
       cartSubTotal: this.state.cartSubTotal + newValue - prevValue
     });
-    console.log(this.state.bookBunch)
+    console.log("sfvha  po " + this.state.cartSubTotal);
   };
 
   handleExpantion = value => {
@@ -43,20 +41,13 @@ export class Cart extends Component {
     });
   };
 
-  UNSAFE_componentWillMount = async () => {
+  UNSAFE_omponentWillMount = async prop => {
     await this.setState({ cartBooks: this.state.bookBunch.length });
-
-    for (var i = 0; i < this.state.cartBooks; i++) {
-      this.setState({
-        cartSubTotal:
-          this.state.cartSubTotal + this.state.bookBunch[i].bookPrice
-      });
-    }
+    this.setState({ cartSubTotal: this.state.cartSubTotal + prop });
   };
 
   updateQuantity = async prop => {
     await this.setState({ cartBooks: this.state.cartBooks + prop });
-    console.log(this.state.cartBooks+"hiiii");
   };
 
   render() {
@@ -67,7 +58,7 @@ export class Cart extends Component {
           books={this.state}
           updateCartSubtotal={this.updateCartSubtotal}
           removeBook={this.removeBook}
-          updateQuantity = {this.updateQuantity}
+          updateQuantity={this.updateQuantity}
         />
         <ControlledExpansionPanels
           expanded={this.state.expanded}
