@@ -11,20 +11,26 @@ export class ListOfBooks extends Component {
 
         this.state = {
             noOfRecord: 0,
-            books: []
+            books: [],
+            flag: 1,
         }
         this.parentRef = React.createRef()
     }
 
+    setFlag = (prop) => {
+        this.setState({ flag: prop })
+    }
+
+
     addToCart = (props) => {
         this.state.books.push(props)
         console.log(this.state.books)
-        this.parentRef.current.updateCartBooks(props,"add")
+        this.parentRef.current.updateCartBooks(props, "add")
     }
 
     removeBookFromParent = (prop) => {
         this.state.books.pop(prop)
-      };
+    };
 
     render() {
         const books = this.props.bookList.map((value, index) => {
@@ -34,16 +40,20 @@ export class ListOfBooks extends Component {
         })
 
         return (
-            <div className="listDiv">
-                <div className="bookItemsDiv">
-                    <h2 className="bookH2">Books <span className="priceFont" style={{ color: "gray" }}> ({this.props.noOfRecord} Items)</span></h2>
-                    <DropDownList />
-                </div>
-                {books}
-                <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)}
-                    onChange={this.props.handleChange} />
-                <Cart bookList={this.state.books } ref={this.parentRef} removeBookFromParent={this.removeBookFromParent}/>
-            </div>
+            <React.Fragment>
+                    <div className={this.state.flag===1 ? "listDiv" : "hidden"}>
+                        <div className="bookItemsDiv hidden">
+                            <h2 className="bookH2">Books <span className="priceFont" style={{ color: "gray" }}> ({this.props.noOfRecord} Items)</span></h2>
+                            <DropDownList />
+                        </div>
+                        {books}
+                        <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)}
+                            onChange={this.props.handleChange} />
+                    </div> 
+                    <div className={this.state.flag===2 ? "listDiv" : "hidden"}>
+                    <Cart bookList={this.state.books} ref={this.parentRef} removeBookFromParent={this.removeBookFromParent} />
+                    </div> 
+            </React.Fragment>
         )
     }
 }

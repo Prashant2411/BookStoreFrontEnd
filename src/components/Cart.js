@@ -32,7 +32,6 @@ export class Cart extends Component {
     this.setState({
       cartSubTotal: this.state.cartSubTotal + newValue - prevValue
     });
-    console.log("sfvha  po " + this.state.cartSubTotal);
   };
 
   handleExpantion = value => {

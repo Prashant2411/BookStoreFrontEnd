@@ -99,7 +99,8 @@ const StyledBadge = withStyles(theme => ({
 
 class PrimarySearchAppBar extends Component {
   state = {
-    searchKey: ""
+    searchKey: "",
+    flag:2
   };
 
   searchData = async event => {
@@ -109,6 +110,12 @@ class PrimarySearchAppBar extends Component {
     else if (event.target.value === "") {
       this.props.bookList();
     }
+  }
+
+  setFlag=(event)=>{
+    console.log(this.state.flag);
+    
+    this.props.bookStoreFrontPaage(this.state.flag)
   }
 
   render() {
@@ -136,7 +143,7 @@ class PrimarySearchAppBar extends Component {
               />
             </div>
             {/* <ShoppingCartIcon className={classes.cartIcon} /> */}
-            <IconButton aria-label="cart" className={classes.cartIcon}>
+            <IconButton aria-label="cart" className={classes.cartIcon} onClick={this.setFlag}>
               <StyledBadge badgeContent={4} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>

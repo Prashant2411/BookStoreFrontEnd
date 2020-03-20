@@ -8,13 +8,22 @@ import Footer from './Footer'
 
 class BookStoreFronPage extends Component {
 
-    state = {
-        bookList: [],
-        searchKey:"",
-        noOfRecord: 0,
-        page: 1,
-        status: "",
-        isActive: false
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            bookList: [],
+            searchKey:"",
+            noOfRecord: 0,
+            page: 1,
+            status: "",
+            isActive: false,
+        }
+        this.bookStoreFrontPaage = React.createRef();
+    }
+    
+    setFlag=(prop)=>{
+        this.bookStoreFrontPaage.current.setFlag(prop)
     }
 
     getBookLists = () => {
@@ -46,7 +55,6 @@ class BookStoreFronPage extends Component {
         await getSearchedBooks(attribute).then(res => {
             this.setState({bookList: res.data})
             }).catch((err)=>{
-               console.log(err,"eee")
                 this.setState({ status: "NO RECORD FOUND"});
                 this.openSnackBar()
         });
@@ -64,8 +72,8 @@ class BookStoreFronPage extends Component {
     render() {
         return (
             <div>
-                <AppBar searchBookList={this.getSearchedBookList} bookList={this.getBookLists}/>
-                <ListOfBooks bookList={this.state.bookList} handleChange={this.handleChange} noOfRecord={this.state.noOfRecord}/>
+                <AppBar searchBookList={this.getSearchedBookList} bookList={this.getBookLists} bookStoreFrontPaage={this.setFlag}/>
+                <ListOfBooks bookList={this.state.bookList} handleChange={this.handleChange} noOfRecord={this.state.noOfRecord} ref={this.bookStoreFrontPaage}/>
 
                 <div className={this.state.isActive ? [Styles.snackbar, Styles.show].join(" ") : Styles.snackbar}>
                     {this.state.status}

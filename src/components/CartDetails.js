@@ -8,7 +8,7 @@ export class CartDetails extends Component {
         this.parentComponent = React.createRef()
     }
 
-    handleExpantion = () =>{
+    handleExpantion = () => {
         document.getElementById('placeOrderButton').style.display = 'none'
         this.props.handleExpantion('expanded')
     }
@@ -29,7 +29,7 @@ export class CartDetails extends Component {
                 <h3 className="subTotal">SubTotal : {this.props.books.cartSubTotal}</h3>
                 {(this.props.books.bookBunch.length > 0) ? <Button onClick={this.handleExpantion} id="placeOrderButton" variant="contained" className="placeOrderButton" color="primary" >
                     PLACE ORDER
-                </Button>: <h6> </h6>}
+                </Button> : <h6> </h6>}
             </div>
         )
     }
