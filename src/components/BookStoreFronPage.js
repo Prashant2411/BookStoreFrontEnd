@@ -20,7 +20,8 @@ class BookStoreFronPage extends Component {
       isActive: false,
       displayType: "allBooks",
       keyword: "",
-      sortType: ''
+      sortType: "",
+      cartBooks: 0
     };
     this.bookStoreFrontPaage = React.createRef();
   }
@@ -29,31 +30,38 @@ class BookStoreFronPage extends Component {
     this.bookStoreFrontPaage.current.setFlag(prop);
   };
 
+  cartBooks = prop => {
+    this.setState({ cartBooks: prop });
+  };
+
   sortData = value => {
-    this.setState({sortType: value, displayType: 'sortBooks'})
-    getSortedBookList(value,this.state.page)
+    this.setState({ sortType: value, displayType: "sortBooks" });
+    getSortedBookList(value, this.state.page)
       .then(res => {
         this.setState({ bookList: res.data });
-      }).catch(err => {});
+      })
+      .catch(err => {});
   };
 
   updateDisplayType = async value => {
-    await this.setState({ displayType: value })
-  }
+    await this.setState({ displayType: value });
+  };
 
   getBookLists = () => {
     if (this.state.displayType === "allBooks") {
-        // this.setState({})        
-      getBookList(this.state.page,this.state.page).then(res => {
+      // this.setState({})
+      getBookList(this.state.page, this.state.page)
+        .then(res => {
           this.setState({ bookList: res.data });
-        }).catch(err => {
+        })
+        .catch(err => {
           console.log(err);
         });
       this.totalItems("");
     } else if (this.state.displayType === "searchBooks") {
-        this.getSearchedBookList(this.state.keyword)
+      this.getSearchedBookList(this.state.keyword);
     } else if (this.state.displayType === "sortBooks") {
-        this.sortData(this.state.sortType)
+      this.sortData(this.state.sortType);
     }
   };
 
@@ -74,8 +82,8 @@ class BookStoreFronPage extends Component {
   };
 
   getSearchedBookList = async attribute => {
-    this.setState({ keyword: attribute, displayType: 'searchBooks' });
-    await getSearchedBooks(attribute,this.state.page)
+    this.setState({ keyword: attribute, displayType: "searchBooks" });
+    await getSearchedBooks(attribute, this.state.page)
       .then(res => {
         this.setState({ bookList: res.data });
       })
@@ -102,6 +110,7 @@ class BookStoreFronPage extends Component {
           bookList={this.getBookLists}
           bookStoreFrontPaage={this.setFlag}
           displayType={this.updateDisplayType}
+          cartBooks={this.state.cartBooks}
         />
         <ListOfBooks
           bookList={this.state.bookList}
@@ -109,6 +118,7 @@ class BookStoreFronPage extends Component {
           noOfRecord={this.state.noOfRecord}
           ref={this.bookStoreFrontPaage}
           sortData={this.sortData}
+          cartBooks={this.cartBooks}
         />
         <div
           className={

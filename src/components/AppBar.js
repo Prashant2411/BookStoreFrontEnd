@@ -94,7 +94,6 @@ const StyledBadge = withStyles(theme => ({
     right: -10,
     top: 5,
     border: `2px solid ${theme.palette.background.paper}`,
-    padding: "0 0 0 15%",
   },
 }))(Badge);
 
@@ -147,7 +146,7 @@ class PrimarySearchAppBar extends Component {
               />
             </div>
             <IconButton aria-label="cart" className={classes.cartIcon} onClick={this.goToCart}>
-              <StyledBadge badgeContent={4} color="secondary">
+              <StyledBadge badgeContent={this.props.cartBooks} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>
             </IconButton>
