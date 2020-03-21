@@ -36,7 +36,7 @@ class OrderSummary extends React.Component {
             {this.props.books.map(value => {
               return (
                 <div className="bookDivHolder">
-                  <img src={source} className="cartBookImg" alt="bookImage" />
+                  <img src={value.bookImageSrc} className="cartBookImg" alt="bookImage" />
                   <div className="cartBookDetails">
                     <h5 className="titleFont">{value.bookName}</h5>
                     <p className="authorFont"> {value.authorName}</p>

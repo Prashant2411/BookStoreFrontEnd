@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import source from '../asserts/first.jpg'
 import minus from '../asserts/minus.png'
 import plus from '../asserts/plus.png'
 
@@ -73,7 +72,7 @@ export class CartBook extends Component {
     render() {
         return (
             <div className="bookDivHolder">
-                <img src={source} className="cartBookImg" alt="bookImage" />
+                <img src={this.props.param.bookImageSrc} className="cartBookImg" alt="bookImage" />
                 <div className="cartBookDetails">
                     <h5 className="titleFont">{this.props.param.bookName}</h5>
                     <p className="authorFont"> {this.props.param.authorName}</p>
