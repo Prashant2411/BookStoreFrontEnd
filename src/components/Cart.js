@@ -42,11 +42,13 @@ export class Cart extends Component {
 
   UNSAFE_omponentWillMount = async prop => {
     await this.setState({ cartBooks: this.state.bookBunch.length });
+    this.props.cartBooks(this.state.cartBooks)
     this.setState({ cartSubTotal: this.state.cartSubTotal + prop });
   };
 
   updateQuantity = async prop => {
     await this.setState({ cartBooks: this.state.cartBooks + prop });
+    this.props.cartBooks(this.state.cartBooks)
   };
 
   render() {

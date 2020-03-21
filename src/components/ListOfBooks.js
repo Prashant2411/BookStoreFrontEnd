@@ -51,7 +51,7 @@ export class ListOfBooks extends Component {
                             onChange={this.props.handleChange} />
                     </div> 
                     <div className={this.state.flag===2 ? "listDiv" : "hidden"}>
-                    <Cart bookList={this.state.books} ref={this.parentRef} removeBookFromParent={this.removeBookFromParent} />
+                    <Cart bookList={this.state.books} ref={this.parentRef} cartBooks={this.props.cartBooks} removeBookFromParent={this.removeBookFromParent} />
                     </div> 
             </React.Fragment>
         )

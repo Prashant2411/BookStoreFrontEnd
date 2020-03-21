@@ -20,7 +20,7 @@ const useStyles = theme => ({
     fontSize: "140%",
     [theme.breakpoints.up("sm")]: {
       display: "block"
-    }
+    },
   },
   search: {
     position: "relative",
@@ -80,7 +80,8 @@ const useStyles = theme => ({
     }
   },
   cartIcon: {
-    margin: "0 0 0 15%"
+    margin: "0 0 0 15%",
+    color:"white"
   },
   appBar: {
     backgroundColor: "#990033",
@@ -93,7 +94,6 @@ const StyledBadge = withStyles(theme => ({
     right: -10,
     top: 5,
     border: `2px solid ${theme.palette.background.paper}`,
-    padding: "0 0 0 15%",
   },
 }))(Badge);
 
@@ -113,9 +113,13 @@ class PrimarySearchAppBar extends Component {
     }
   }
 
-  setFlag=(event)=>{
+  goToCart=(event)=>{
     this.props.bookStoreFrontPaage(this.state.flag)
   }
+
+  homePage=(event)=>{
+    this.props.bookStoreFrontPaage(1) 
+   }
 
   render() {
     const { classes } = this.props;
@@ -123,8 +127,8 @@ class PrimarySearchAppBar extends Component {
       <div className={classes.grow}>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
-            <MenuBookIcon className={classes.bookIcon} />
-            <Typography className={classes.title} variant="h6" noWrap>
+            <MenuBookIcon className={classes.bookIcon} onClick={this.homePage}/>
+            <Typography className={classes.title} value="1" variant="h6" noWrap onClick={this.homePage}>
               BookStore
             </Typography>
             <div className={classes.search}>
@@ -141,8 +145,8 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <IconButton aria-label="cart" className={classes.cartIcon} onClick={this.setFlag}>
-              <StyledBadge badgeContent={4} color="secondary">
+            <IconButton aria-label="cart" className={classes.cartIcon} onClick={this.goToCart}>
+              <StyledBadge badgeContent={this.props.cartBooks} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>
             </IconButton>
