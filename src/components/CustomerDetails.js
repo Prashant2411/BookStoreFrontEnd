@@ -11,6 +11,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
+import Styles from "../css/snackbar.module.css";
+
 
 const ids = [
   "customerDetails",
@@ -88,14 +90,25 @@ class ControlledExpansionPanels extends React.Component {
     Town: "",
     Type: "",
     expanded: false,
-    formValid: true
+    formValid: true,
+    status: "",
+    isActive: false,
+  };
+
+  openSnackBar = async (prop) => {
+    await this.setState({status:prop})
+    this.setState({ isActive: true }, () => {
+      setTimeout(() => {
+        this.setState({ isActive: false });
+      }, 3000);
+    });
   };
 
   validate = e => {
     const regexp = /[A-Za-z]{3,20}/;
     const char = e.target.value;
     if (!regexp.test(char)) {
-      alert("Invalid Name");
+      this.openSnackBar("Invalid Name");
       this.setState({
         [e.target.name]: ""
       });
@@ -106,7 +119,8 @@ class ControlledExpansionPanels extends React.Component {
     const regexp1 = /[5-9]\d{9}$/;
     const char = e.target.value;
     if (!regexp1.test(char)) {
-      alert("Invalid Phone Number");
+      this.openSnackBar("Invalid Phone Number");
+
       this.setState({
         [e.target.name]: ""
       });
@@ -118,7 +132,7 @@ class ControlledExpansionPanels extends React.Component {
     const char = e.target.value;
     if (!regexp2.test(char)) {
       document.getElementById(e.target.id).style.border = "red";
-      alert("Invalid Data");
+      this.openSnackBar("Invalid Data");
       this.setState({
         [e.target.name]: ""
       });
@@ -137,7 +151,7 @@ class ControlledExpansionPanels extends React.Component {
   };
 
   buttonPressed = async event => {
-    this.setState({ formValid:true })
+    this.setState({ formValid: true })
     await ids
       .filter(value => {
         if (
@@ -145,18 +159,18 @@ class ControlledExpansionPanels extends React.Component {
           value === "customerDetails8" ||
           value === "customerDetails7"
         ) {
-          
+
           return false;
         }
         return true;
       }).map(value =>
-      document.getElementById(value).checkValidity() === false
-        ? this.setState({ formValid : false })
-        : null,
-    );
+        document.getElementById(value).checkValidity() === false
+          ? this.setState({ formValid: false })
+          : null,
+      );
     await this.validateRadioButton();
     if (this.state.formValid === false) {
-      alert("Invalid Data");
+      this.openSnackBar("Invalid Phone Data");
       return this.state.formValid;
     }
     ids.map(values => (document.getElementById(values).disabled = true));
@@ -320,6 +334,15 @@ class ControlledExpansionPanels extends React.Component {
             </Button>
           </form>
         </ExpansionPanelDetails>
+        <div
+          className={
+            this.state.isActive
+              ? [Styles.snackbar, Styles.show].join(" ")
+              : Styles.snackbar
+          }
+        >
+          {this.state.status}
+        </div>
       </ExpansionPanel>
     );
   }
