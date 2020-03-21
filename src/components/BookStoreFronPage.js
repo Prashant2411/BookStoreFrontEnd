@@ -17,7 +17,10 @@ class BookStoreFronPage extends Component {
       noOfRecord: 0,
       page: 1,
       status: "",
-      isActive: false
+      isActive: false,
+      displayType: "allBooks",
+      keyword: "",
+      sortType: ''
     };
     this.bookStoreFrontPaage = React.createRef();
   }
@@ -27,22 +30,31 @@ class BookStoreFronPage extends Component {
   };
 
   sortData = value => {
-    getSortedBookList(value)
+    this.setState({sortType: value, displayType: 'sortBooks'})
+    getSortedBookList(value,this.state.page)
       .then(res => {
         this.setState({ bookList: res.data });
-      })
-      .catch(err => {});
+      }).catch(err => {});
   };
 
+  updateDisplayType = async value => {
+    await this.setState({ displayType: value })
+  }
+
   getBookLists = () => {
-    getBookList(this.state.page)
-      .then(res => {
-        this.setState({ bookList: res.data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    this.totalItems("");
+    if (this.state.displayType === "allBooks") {
+        // this.setState({})        
+      getBookList(this.state.page,this.state.page).then(res => {
+          this.setState({ bookList: res.data });
+        }).catch(err => {
+          console.log(err);
+        });
+      this.totalItems("");
+    } else if (this.state.displayType === "searchBooks") {
+        this.getSearchedBookList(this.state.keyword)
+    } else if (this.state.displayType === "sortBooks") {
+        this.sortData(this.state.sortType)
+    }
   };
 
   UNSAFE_componentWillMount() {
@@ -62,7 +74,8 @@ class BookStoreFronPage extends Component {
   };
 
   getSearchedBookList = async attribute => {
-    await getSearchedBooks(attribute)
+    this.setState({ keyword: attribute, displayType: 'searchBooks' });
+    await getSearchedBooks(attribute,this.state.page)
       .then(res => {
         this.setState({ bookList: res.data });
       })
@@ -88,6 +101,7 @@ class BookStoreFronPage extends Component {
           searchBookList={this.getSearchedBookList}
           bookList={this.getBookLists}
           bookStoreFrontPaage={this.setFlag}
+          displayType={this.updateDisplayType}
         />
         <ListOfBooks
           bookList={this.state.bookList}

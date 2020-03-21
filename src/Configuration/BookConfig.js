@@ -6,10 +6,10 @@ export function getBookList(pageNo){
     })
 }
 
-export function getSearchedBooks(attribute) {
+export function getSearchedBooks(attribute,pageNo) {
     return axios({
         method: "get",
-        url: "http://localhost:8080/bookstore/search/" + attribute + "/1"
+        url: "http://localhost:8080/bookstore/search/" + attribute + "/"+pageNo
     })
 }
 
@@ -27,9 +27,9 @@ export function getSortAttribute() {
     })
 }
 
-export function getSortedBookList(attribute){
+export function getSortedBookList(attribute,pageNo){
     return axios({
         method: "get",
-        url: "http://localhost:8080/bookstore/sortattribute/"+attribute+"/"+1
+        url: "http://localhost:8080/bookstore/sortattribute/"+attribute+"/"+pageNo
     })
 }

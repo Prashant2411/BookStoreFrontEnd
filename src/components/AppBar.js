@@ -108,13 +108,12 @@ class PrimarySearchAppBar extends Component {
       this.props.searchBookList(event.target.value)
     }
     else if (event.target.value === "") {
-      this.props.bookList();
+      await this.props.displayType('allBooks')
+      await this.props.bookList();
     }
   }
 
   setFlag=(event)=>{
-    console.log(this.state.flag);
-    
     this.props.bookStoreFrontPaage(this.state.flag)
   }
 
@@ -142,7 +141,6 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            {/* <ShoppingCartIcon className={classes.cartIcon} /> */}
             <IconButton aria-label="cart" className={classes.cartIcon} onClick={this.setFlag}>
               <StyledBadge badgeContent={4} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
