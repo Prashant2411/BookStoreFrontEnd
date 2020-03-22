@@ -9,6 +9,8 @@ import MenuBookIcon from "@material-ui/icons/MenuBookSharp";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
+import Styles from "../css/snackbar.module.css";
+
 
 const useStyles = theme => ({
   grow: {
@@ -81,7 +83,7 @@ const useStyles = theme => ({
   },
   cartIcon: {
     margin: "0 0 0 15%",
-    color:"white"
+    color: "white"
   },
   appBar: {
     backgroundColor: "#990033",
@@ -100,7 +102,17 @@ const StyledBadge = withStyles(theme => ({
 class PrimarySearchAppBar extends Component {
   state = {
     searchKey: "",
-    flag:2
+    flag: 2,
+    status: "Your Ca rt is Empty",
+    isActive: false,
+  };
+
+  openSnackBar = async () => {
+    await this.setState({ isActive: true }, () => {
+      setTimeout(() => {
+        this.setState({ isActive: false });
+      }, 3000);
+    });
   };
 
   searchData = async event => {
@@ -113,13 +125,13 @@ class PrimarySearchAppBar extends Component {
     }
   }
 
-  goToCart=(event)=>{
+  goToCart = (event) => {
     this.props.bookStoreFrontPaage(this.state.flag)
   }
 
-  homePage=(event)=>{
-    this.props.bookStoreFrontPaage(1) 
-   }
+  homePage = (event) => {
+    this.props.bookStoreFrontPaage(1)
+  }
 
   render() {
     const { classes } = this.props;
@@ -127,7 +139,7 @@ class PrimarySearchAppBar extends Component {
       <div className={classes.grow}>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
-            <MenuBookIcon className={classes.bookIcon} onClick={this.homePage}/>
+            <MenuBookIcon className={classes.bookIcon} onClick={this.homePage} />
             <Typography className={classes.title} value="1" variant="h6" noWrap onClick={this.homePage}>
               BookStore
             </Typography>
@@ -145,7 +157,7 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <IconButton aria-label="cart" className={classes.cartIcon} onClick={this.goToCart}>
+            <IconButton aria-label="cart" className={classes.cartIcon} onClick={(this.props.cartBooks > 0) ? this.goToCart : this.openSnackBar}>
               <StyledBadge badgeContent={this.props.cartBooks} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>
@@ -153,6 +165,17 @@ class PrimarySearchAppBar extends Component {
             <div className={classes.grow} />
           </Toolbar>
         </AppBar>
+
+        <div
+          className={
+            this.state.isActive
+              ? [Styles.snackbar, Styles.show].join(" ")
+              : Styles.snackbar
+          }
+        >
+          {this.state.status}
+        </div>
+
       </div>
     );
   }

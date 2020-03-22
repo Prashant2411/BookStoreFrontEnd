@@ -96,7 +96,7 @@ class ControlledExpansionPanels extends React.Component {
   };
 
   openSnackBar = async (prop) => {
-    await this.setState({status:prop})
+    await this.setState({ status: prop })
     this.setState({ isActive: true }, () => {
       setTimeout(() => {
         this.setState({ isActive: false });

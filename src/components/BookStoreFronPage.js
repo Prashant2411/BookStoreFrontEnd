@@ -40,7 +40,7 @@ class BookStoreFronPage extends Component {
       .then(res => {
         this.setState({ bookList: res.data });
       })
-      .catch(err => {});
+      .catch(err => { });
   };
 
   updateDisplayType = async value => {

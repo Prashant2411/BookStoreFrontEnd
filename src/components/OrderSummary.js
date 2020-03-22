@@ -40,10 +40,10 @@ class OrderSummary extends React.Component {
                   <div className="cartBookDetails">
                     <h5 className="titleFont">{value.bookName}</h5>
                     <p className="authorFont"> {value.authorName}</p>
-              <h4 className="priceFont">{value.bookPrice}</h4>
+                    <h4 className="priceFont">{value.bookPrice}</h4>
                   </div>
                 </div>
-              ); 
+              );
             })}
             <h4><b>Subtotal: {this.props.subTotal}</b></h4>
           </div>

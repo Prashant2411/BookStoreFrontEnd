@@ -41,18 +41,18 @@ export class ListOfBooks extends Component {
 
         return (
             <React.Fragment>
-                    <div className={this.state.flag===1 ? "listDiv" : "hidden"}>
-                        <div className="bookItemsDiv">
-                            <h2 className="bookH2">Books <span className="priceFont" style={{ color: "gray" }}> ({this.props.noOfRecord} Items)</span></h2>
-                            <DropDownList sortData={this.props.sortData} />
-                        </div>
-                        {books}
-                        <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)}
-                            onChange={this.props.handleChange} />
-                    </div> 
-                    <div className={this.state.flag===2 ? "listDiv" : "hidden"}>
+                <div className={this.state.flag === 1 ? "listDiv" : "hidden"}>
+                    <div className="bookItemsDiv">
+                        <h2 className="bookH2">Books <span className="priceFont" style={{ color: "gray" }}> ({this.props.noOfRecord} Items)</span></h2>
+                        <DropDownList sortData={this.props.sortData} />
+                    </div>
+                    {books}
+                    <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)}
+                        onChange={this.props.handleChange} />
+                </div>
+                <div className={this.state.flag === 2 ? "listDiv" : "hidden"}>
                     <Cart bookList={this.state.books} ref={this.parentRef} cartBooks={this.props.cartBooks} removeBookFromParent={this.removeBookFromParent} />
-                    </div> 
+                </div>
             </React.Fragment>
         )
     }

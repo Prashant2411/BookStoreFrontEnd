@@ -16,8 +16,8 @@ export class CartBook extends Component {
     }
 
     inputValue = async (event) => {
-        return this.state.bookCount < 1 || this.state.bookCount > this.props.param.noOfCopies 
-        ? this.setState({ bookCount: 1 }) : this.imputHandler();
+        return this.state.bookCount < 1 || this.state.bookCount > this.props.param.noOfCopies
+            ? this.setState({ bookCount: 1 }) : this.imputHandler();
 
     }
 

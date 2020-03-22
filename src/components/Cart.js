@@ -17,8 +17,8 @@ export class Cart extends Component {
   }
 
   updateCartBooks = async (prop, a) => {
-      await this.state.bookBunch.push(prop);
-      await this.UNSAFE_omponentWillMount(prop.bookPrice);
+    await this.state.bookBunch.push(prop);
+    await this.UNSAFE_omponentWillMount(prop.bookPrice);
   };
 
   removeBook = prop => {
