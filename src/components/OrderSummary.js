@@ -1,5 +1,4 @@
 import React from "react";
-import source from "../asserts/first.jpg";
 import { withStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";

@@ -13,6 +13,7 @@ class BookStoreFronPage extends Component {
 
     this.state = {
       bookList: [],
+      cartBooks: this.props.history.location.state,
       searchKey: "",
       noOfRecord: 0,
       page: 1,
@@ -21,7 +22,6 @@ class BookStoreFronPage extends Component {
       displayType: "allBooks",
       keyword: "",
       sortType: "",
-      cartBooks: 0
     };
     this.bookStoreFrontPaage = React.createRef();
   }
@@ -30,8 +30,10 @@ class BookStoreFronPage extends Component {
     this.bookStoreFrontPaage.current.setFlag(prop);
   };
 
-  cartBooks = prop => {
-    this.setState({ cartBooks: prop });
+  setCartBooks = prop => {
+    this.state.cartBooks.push(prop)
+    console.log(this.state.cartBooks);
+    this.setState({ cartBooks: this.state.cartBooks })
   };
 
   sortData = value => {
@@ -49,7 +51,6 @@ class BookStoreFronPage extends Component {
 
   getBookLists = () => {
     if (this.state.displayType === "allBooks") {
-      // this.setState({})
       getBookList(this.state.page, this.state.page)
         .then(res => {
           this.setState({ bookList: res.data });
@@ -108,9 +109,9 @@ class BookStoreFronPage extends Component {
         <AppBar
           searchBookList={this.getSearchedBookList}
           bookList={this.getBookLists}
-          bookStoreFrontPaage={this.setFlag}
           displayType={this.updateDisplayType}
           cartBooks={this.state.cartBooks}
+          cartBooksCount={this.state.cartBooks.length}
         />
         <ListOfBooks
           bookList={this.state.bookList}
@@ -118,7 +119,7 @@ class BookStoreFronPage extends Component {
           noOfRecord={this.state.noOfRecord}
           ref={this.bookStoreFrontPaage}
           sortData={this.sortData}
-          cartBooks={this.cartBooks}
+          setCartBooks={this.setCartBooks}
         />
         <div
           className={

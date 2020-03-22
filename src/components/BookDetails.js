@@ -20,7 +20,7 @@ export class
     }
 
     addToCart = () => {
-        this.props.addToCart(this.props.bookList)
+        this.props.setCartBooks(this.props.bookList)
     }
 
     render() {

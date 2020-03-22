@@ -10,6 +10,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import Styles from "../css/snackbar.module.css";
+import { withRouter } from 'react-router-dom'
 
 
 const useStyles = theme => ({
@@ -100,12 +101,17 @@ const StyledBadge = withStyles(theme => ({
 }))(Badge);
 
 class PrimarySearchAppBar extends Component {
-  state = {
-    searchKey: "",
-    flag: 2,
-    status: "Your Ca rt is Empty",
-    isActive: false,
-  };
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      searchKey: "",
+      status: "Your Ca rt is Empty",
+      isActive: false,
+      cartBooks:this.props.cartBooks
+    }
+  }
 
   openSnackBar = async () => {
     await this.setState({ isActive: true }, () => {
@@ -125,12 +131,20 @@ class PrimarySearchAppBar extends Component {
     }
   }
 
-  goToCart = (event) => {
-    this.props.bookStoreFrontPaage(this.state.flag)
+  goToCart = () => {
+    if(this.props.history.location.pathname==="/"){
+    this.props.history.push({
+      pathname: "/cart",
+      state: this.props.cartBooks
+    })}
   }
 
   homePage = (event) => {
-    this.props.bookStoreFrontPaage(1)
+    if(this.props.history.location.pathname==="/cart"){
+      this.props.history.push({
+        pathname: "/",
+        state: this.props.cartBooks
+      })}
   }
 
   render() {
@@ -157,8 +171,8 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <IconButton aria-label="cart" className={classes.cartIcon} onClick={(this.props.cartBooks > 0) ? this.goToCart : this.openSnackBar}>
-              <StyledBadge badgeContent={this.props.cartBooks} color="secondary">
+            <IconButton aria-label="cart" className={classes.cartIcon} onClick={(this.state.cartBooks.length > 0) ? this.goToCart : this.openSnackBar}>
+              <StyledBadge badgeContent={this.state.cartBooks.length} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>
             </IconButton>
@@ -181,4 +195,4 @@ class PrimarySearchAppBar extends Component {
   }
 }
 
-export default withStyles(useStyles)(PrimarySearchAppBar);
+export default withRouter(withStyles(useStyles)(PrimarySearchAppBar));
