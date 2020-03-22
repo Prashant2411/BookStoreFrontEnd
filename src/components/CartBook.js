@@ -7,7 +7,7 @@ export class CartBook extends Component {
         super(props)
 
         this.state = {
-            bookCount: 1,
+            bookCount: this.props.param.quantity,
             nUnitOfBookPrice: this.props.param.bookPrice,
             prevValue: this.props.param.bookPrice,
             quantity: 1
@@ -16,57 +16,34 @@ export class CartBook extends Component {
     }
 
     inputValue = async (event) => {
-        return this.state.bookCount < 1 || this.state.bookCount > this.props.param.noOfCopies
-            ? this.setState({ bookCount: 1 }) : this.imputHandler();
-
+        return this.props.param.quantity < 1 || this.props.param.quantity > this.props.param.noOfCopies
+            ? this.props.updateBookQuantity(this.props.param.id, 1) : this.inputHandler(event.target.value);
     }
 
-    imputHandler = () => {
-        this.noOfUnitPrice()
-        this.props.updateQuantity(this.state.bookCount - this.state.quantity)
-        this.setState({ quantity: this.state.bookCount })
+    inputHandler = (event) => {
+        this.props.updateBookQuantity(this.props.param.id,event)
+        this.props.updateCartSubtotal()
     }
 
-
-    noOfUnitPrice = async () => {
-        await this.setState(prev => ({
-            nUnitOfBookPrice: this.state.bookCount * this.props.param.bookPrice
-        }));
-        this.props.updateCartSubtotal(this.state.prevValue, this.state.nUnitOfBookPrice)
-        this.setState({ prevValue: this.state.nUnitOfBookPrice })
-    }
 
     decreaseCount = async () => {
-        if (this.state.bookCount > 1) {
-            await this.setState(prevState => ({
-                bookCount: prevState.bookCount - 1
-            }))
-            this.noOfUnitPrice()
-            this.props.updateQuantity(-1)
-            this.setState({ quantity: this.state.quantity - 1 })
+        if (this.props.param.quantity > 1) {
+            await this.props.updateBookQuantity(this.props.param.id, this.props.param.quantity - 1)
+            this.props.updateCartSubtotal()
         }
     }
 
     increaseCount = async () => {
-
-        if (this.props.param.noOfCopies > this.state.bookCount) {
-            await this.setState(
-                prevState => ({
-                    bookCount: prevState.bookCount + 1
-                })
-            )
-            this.noOfUnitPrice()
-            this.props.updateQuantity(1)
-            this.setState({ quantity: this.state.quantity + 1 })
+        if (this.props.param.noOfCopies > this.props.param.quantity) {
+            await this.props.updateBookQuantity(this.props.param.id, this.props.param.quantity + 1)
+            console.log(this.props.param.quantity)
+            this.props.updateCartSubtotal()
         }
     }
 
     removeBookEvent = async () => {
-        this.props.updateQuantity(-this.state.bookCount)
-        await this.setState({ bookCount: 0, nUnitOfBookPrice: 0 })
-        this.props.updateCartSubtotal(this.state.prevValue, this.state.nUnitOfBookPrice)
         this.props.removeBook(this.props.param)
-        this.setState({ quantity: 0 })
+        this.props.updateCartSubtotal()
     }
 
     render() {
@@ -82,7 +59,8 @@ export class CartBook extends Component {
                             <img className="bookDetailsButtonImg" alt="minus" src={minus} onClick={this.decreaseCount}>
                             </img>
                         </button>
-                        <input type="number" className="cartBookCount" value={this.state.bookCount} onChange={event => this.setState({ bookCount: parseInt(event.target.value) })} onBlur={this.inputValue} />
+                        <input type="number" className="cartBookCount" value={this.props.param.quantity}
+                            onChange={event => this.props.updateBookQuantity(this.props.param.id, parseInt(event.target.value))} onBlur={this.inputValue} />
                         <button className="bookDetailsButton">
                             <img className="bookDetailsButtonImg" alt="plus" src={plus} onClick={this.increaseCount} >
                             </img>

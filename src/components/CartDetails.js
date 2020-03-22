@@ -21,8 +21,9 @@ export class CartDetails extends Component {
                     this.props.books.bookBunch.map(value => {
                         return (
                             <CartBook key={value.id} param={value}
-                                removeBook={this.props.removeBook} updateQuantity={this.props.updateQuantity}
-                                updateCartSubtotal={this.props.updateCartSubtotal} />
+                                removeBook={this.props.removeBook}
+                                updateCartSubtotal={this.props.updateCartSubtotal}
+                                updateBookQuantity={this.props.updateBookQuantity} />
                         );
                     }
                     ) : <h3>Your cart is empty</h3>}

@@ -13,7 +13,7 @@ class BookStoreFronPage extends Component {
 
     this.state = {
       bookList: [],
-      cartBooks: this.props.history.location.state,
+      cartBooks: [],
       searchKey: "",
       noOfRecord: 0,
       page: 1,
@@ -23,16 +23,11 @@ class BookStoreFronPage extends Component {
       keyword: "",
       sortType: "",
     };
-    this.bookStoreFrontPaage = React.createRef();
   }
 
-  setFlag = prop => {
-    this.bookStoreFrontPaage.current.setFlag(prop);
-  };
-
   setCartBooks = prop => {
+    prop.quantity= 1
     this.state.cartBooks.push(prop)
-    console.log(this.state.cartBooks);
     this.setState({ cartBooks: this.state.cartBooks })
   };
 

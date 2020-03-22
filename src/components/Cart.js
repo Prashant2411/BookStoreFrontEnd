@@ -6,6 +6,7 @@ import OrderSummary from "./OrderSummary";
 import AppBar from "./AppBar";
 import Footer from "./Footer";
 
+
 export class Cart extends Component {
   constructor(props) {
     super(props);
@@ -14,36 +15,46 @@ export class Cart extends Component {
       cartBooks: this.props.history.location.state.length,
       cartSubTotal: 0,
       expanded: false,
-      expanded2: false
+      expanded2: false,
     };
   }
 
-  UNSAFE_componentWillMount(){
-    this.props.history.location.state.map((value,index)=>{
-      this.setState((prev)=>({
+  UNSAFE_componentWillMount() {
+    this.props.history.location.state.map((value, index) => {
+      this.setState((prev) => ({
         cartSubTotal: prev.cartSubTotal + value.bookPrice
       }))
     })
+    this.updateQuantity()
   }
 
-  updateCartBooks = async (prop, a) => {
-    await this.state.bookBunch.push(prop);
-    await this.UNSAFE_omponentWillMount(prop.bookPrice);
-  };
+  updateBookQuantity = async (bookId, bookQuantity) => {
+    console.log("hii im in updateBookQ", bookId, bookQuantity);
+    const index = this.state.bookBunch.findIndex((book) => {
+      return book.id === bookId
+    })
+    const book = Object.assign({}, this.state.bookBunch[index])
+    book.quantity = bookQuantity;
+    const books = Object.assign([], this.state.bookBunch);
+    books[index] = book;
+    await this.setState({ bookBunch: books })
+    console.log(this.state.bookBunch, "value");
+  }
 
   removeBook = prop => {
     this.setState(prevState => ({
       bookBunch: prevState.bookBunch.filter(el => el.bookName !== prop.bookName)
     }));
-    // this.props.removeBookFromParent(prop);
   };
 
-  updateCartSubtotal = (prevValue, newValue) => {
-    this.setState({
-      cartSubTotal: this.state.cartSubTotal + newValue - prevValue
-    });
-    console.log(this.props.location.pathname);
-
+  updateCartSubtotal = async () => {
+    await this.setState({ cartSubTotal: 0 })
+    await this.state.bookBunch.map((value, index) => {
+      this.setState((prev) => ({
+        cartSubTotal: prev.cartSubTotal + value.bookPrice * value.quantity
+      }))
+    })
+    await this.updateQuantity()
   };
 
   handleExpantion = value => {
@@ -52,44 +63,43 @@ export class Cart extends Component {
     });
   };
 
-  UNSAFE_omponentWillMount = async prop => {
-    await this.setState({ cartBooks: this.state.bookBunch.length });
-    this.props.cartBooks(this.state.cartBooks)
-    this.setState({ cartSubTotal: this.state.cartSubTotal + prop });
-  };
-
-  updateQuantity = async prop => {
-    await this.setState({ cartBooks: this.state.cartBooks + prop });
-    // this.props.cartBooks(this.state.cartBooks)
+  updateQuantity = async () => {
+    await this.setState({ cartBooks: 0 })
+    await this.state.bookBunch.map((value, index) => {
+      this.setState((prev) => ({
+        cartBooks: prev.cartBooks + value.quantity
+      }))
+    })
   };
 
   render() {
     return (
       <Fragment>
         <AppBar
-          displayType={this.updateDisplayType}
           cartBooks={this.state.bookBunch}
-          cartBooksCount={this.state.bookBunch.length}
+          cartBooksCount={this.state.cartBooks}
         />
-      <div className="CartDiv">
-        <CartDetails
-          handleExpantion={this.handleExpantion}
-          books={this.state}
-          updateCartSubtotal={this.updateCartSubtotal}
-          removeBook={this.removeBook}
-          updateQuantity={this.updateQuantity}
-        />
-        <ControlledExpansionPanels
-          expanded={this.state.expanded}
-          handleExpantion={this.handleExpantion}
-        />
-        <OrderSummary
-          books={this.state.bookBunch}
-          subTotal={this.state.cartSubTotal}
-          expanded2={this.state.expanded2}
-        />
-      </div>
-      <Footer/>
+        <div className="CartDiv">
+          <CartDetails
+            handleExpantion={this.handleExpantion}
+            books={this.state}
+            updateCartSubtotal={this.updateCartSubtotal}
+            removeBook={this.removeBook}
+            updateQuantity={this.updateQuantity}
+            updateBookQuantity={this.updateBookQuantity}
+
+          />
+          <ControlledExpansionPanels
+            expanded={this.state.expanded}
+            handleExpantion={this.handleExpantion}
+          />
+          <OrderSummary
+            books={this.state.bookBunch}
+            subTotal={this.state.cartSubTotal}
+            expanded2={this.state.expanded2}
+          />
+        </div>
+        <Footer />
       </Fragment>
     );
   }

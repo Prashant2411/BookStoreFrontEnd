@@ -11,6 +11,8 @@ import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import Styles from "../css/snackbar.module.css";
 import { withRouter } from 'react-router-dom'
+import '../css/BookDetails.css'
+
 
 
 const useStyles = theme => ({
@@ -109,8 +111,9 @@ class PrimarySearchAppBar extends Component {
       searchKey: "",
       status: "Your Ca rt is Empty",
       isActive: false,
-      cartBooks:this.props.cartBooks
+      cartBooks: this.props.cartBooks
     }
+
   }
 
   openSnackBar = async () => {
@@ -132,19 +135,23 @@ class PrimarySearchAppBar extends Component {
   }
 
   goToCart = () => {
-    if(this.props.history.location.pathname==="/"){
-    this.props.history.push({
-      pathname: "/cart",
-      state: this.props.cartBooks
-    })}
+    console.log(this.props)
+    if (this.props.history.location.pathname === "/") {
+      this.props.history.push({
+        pathname: "/cart",
+        state: this.props.cartBooks
+
+      })
+    }
   }
 
   homePage = (event) => {
-    if(this.props.history.location.pathname==="/cart"){
+    if (this.props.history.location.pathname === "/cart") {
       this.props.history.push({
         pathname: "/",
         state: this.props.cartBooks
-      })}
+      })
+    }
   }
 
   render() {
@@ -157,7 +164,7 @@ class PrimarySearchAppBar extends Component {
             <Typography className={classes.title} value="1" variant="h6" noWrap onClick={this.homePage}>
               BookStore
             </Typography>
-            <div className={classes.search}>
+            <div className={(this.props.history.location.pathname === "/") ? classes.search : "hidden"}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
