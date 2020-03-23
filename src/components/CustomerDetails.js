@@ -105,7 +105,9 @@ class ControlledExpansionPanels extends React.Component {
         Address: this.customerData.Address,
         City: this.customerData.City,
         Town: this.customerData.Town,
-        Type: this.customerData.Type
+        Type: this.customerData.Type,
+        // expanded: this.customerData.expanded,
+        // formValid: this.customerData.formValid,
       })
     }
   }
@@ -184,13 +186,14 @@ class ControlledExpansionPanels extends React.Component {
       );
     await this.validateRadioButton();
     if (this.state.formValid === false) {
-      this.openSnackBar("Invalid Phone Data");
+      this.openSnackBar("Invalid Data");
       return this.state.formValid;
     }
     ids.map(values => (document.getElementById(values).disabled = true));
     document.getElementById("edit").style.display = "block";
     document.getElementById("onSumbit").style.display = "none";
     this.props.handleExpantion("expanded2");
+    localStorage.setItem('customerDetails', JSON.stringify(this.state))
   };
 
   editDetails = () => {
@@ -201,7 +204,7 @@ class ControlledExpansionPanels extends React.Component {
 
   updateState = event => {
     this.setState({ [event.target.name]: event.target.value });
-    localStorage.setItem('customerDetails', JSON.stringify(this.state))
+    
   };
 
 

@@ -53,7 +53,7 @@ export class CartBook extends Component {
                 <div className="cartBookDetails">
                     <h5 className="titleFont">{this.props.param.bookName}</h5>
                     <p className="authorFont"> {this.props.param.authorName}</p>
-                    <h4 className="priceFont">{this.props.param.bookPrice}</h4>
+                    <h4 className="priceFont">Rs.{this.props.param.bookPrice}</h4>
                     <div className="cartButtonRow">
                         <button className="bookDetailsButton">
                             <img className="bookDetailsButtonImg" alt="minus" src={minus} onClick={this.decreaseCount}>

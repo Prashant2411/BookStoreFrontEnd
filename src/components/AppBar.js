@@ -13,6 +13,8 @@ import Styles from "../css/snackbar.module.css";
 import { withRouter } from 'react-router-dom'
 import '../css/BookDetails.css'
 
+
+
 const useStyles = theme => ({
   grow: {
     flexGrow: 1
@@ -84,14 +86,17 @@ const useStyles = theme => ({
   },
   cartIcon: {
     margin: "0 0 0 15%",
-    color: "white",
+    color: "white"
+  },
+  cartIcon1: {
+    margin: "0 0 0 62%",
+    color: "white"
   },
   appBar: {
     backgroundColor: "#990033",
     position: "fixed",
-    // display:"flex",
-    // flexDirection:"row",
-    // justifyContent:'space-between'
+    display:"flex",
+    justifyContent:"center"
   }
 });
 
@@ -169,7 +174,7 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <IconButton aria-label="cart" className={classes.cartIcon} onClick={(this.props.cartBooksCount > 0) ? this.goToCart : this.openSnackBar}>
+            <IconButton aria-label="cart" className={(this.props.history.location.pathname === "/") ? classes.cartIcon : classes.cartIcon1} onClick={(this.props.cartBooksCount > 0) ? this.goToCart : this.openSnackBar}>
               <StyledBadge badgeContent={this.props.cartBooksCount} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>

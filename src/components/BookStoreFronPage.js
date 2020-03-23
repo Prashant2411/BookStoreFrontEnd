@@ -32,7 +32,7 @@ class BookStoreFronPage extends Component {
     this.setState({ cartBooks: this.state.cartBooks })
     localStorage.setItem('cartBook',JSON.stringify(this.state.cartBooks))
     this.setState({ cartBooksCount: this.state.cartBooks.length })
-    console.log(JSON.parse(localStorage.getItem('cartBook')),"demo")
+    // console.log(JSON.parse(localStorage.getItem('cartBook')),"demo")
   };
 
   sortData = value => {
