@@ -5,52 +5,60 @@ import "../css/Cart.css";
 import OrderSummary from "./OrderSummary";
 import AppBar from "./AppBar";
 import Footer from "./Footer";
-
+import { addOrderData } from "../Configuration/BookConfig";
 
 export class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookBunch: JSON.parse(localStorage.getItem('cartBook')),
-      cartBookCount: JSON.parse(localStorage.getItem('cartBook')).length,
+      bookBunch: JSON.parse(localStorage.getItem("cartBook")),
+      cartBookCount: JSON.parse(localStorage.getItem("cartBook")).length,
       cartSubTotal: 0,
       expanded: false,
       expanded2: false,
+      customerDetails: [],
+      orderDetails: []
     };
   }
 
   UNSAFE_componentWillMount() {
     this.updateCartSubtotal();
-    this.updateQuantity()
+    this.updateQuantity();
   }
 
   updateBookQuantity = async (bookId, bookQuantity) => {
-    const index = this.state.bookBunch.findIndex((book) => {
-      return book.id === bookId
-    })
-    const book = Object.assign({}, this.state.bookBunch[index])
+    const index = this.state.bookBunch.findIndex(book => {
+      return book.id === bookId;
+    });
+    const book = Object.assign({}, this.state.bookBunch[index]);
     book.quantity = bookQuantity;
     const books = Object.assign([], this.state.bookBunch);
     books[index] = book;
-    await this.setState({ bookBunch: books })
-    await localStorage.setItem('cartBook',JSON.stringify(this.state.bookBunch))
-  }
+    await this.setState({ bookBunch: books });
+    await localStorage.setItem(
+      "cartBook",
+      JSON.stringify(this.state.bookBunch)
+    );
+  };
 
-  removeBook = async (prop) =>  {
+  removeBook = async prop => {
     await this.setState(prevState => ({
       bookBunch: prevState.bookBunch.filter(el => el.bookName !== prop.bookName)
     }));
-    await localStorage.setItem('cartBook',JSON.stringify(this.state.bookBunch))
+    await localStorage.setItem(
+      "cartBook",
+      JSON.stringify(this.state.bookBunch)
+    );
   };
 
   updateCartSubtotal = async () => {
-    await this.setState({ cartSubTotal: 0 })
+    await this.setState({ cartSubTotal: 0 });
     await this.state.bookBunch.map((value, index) => {
-      return (this.setState((prev) => ({
+      return this.setState(prev => ({
         cartSubTotal: prev.cartSubTotal + value.bookPrice * value.quantity
-      })))
-    })
-    await this.updateQuantity()
+      }));
+    });
+    await this.updateQuantity();
   };
 
   handleExpantion = value => {
@@ -60,20 +68,47 @@ export class Cart extends Component {
   };
 
   updateQuantity = async () => {
-    await this.setState({ cartBookCount: 0 })
+    await this.setState({ cartBookCount: 0 });
     await this.state.bookBunch.map((value, index) => {
-      return (this.setState((prev) => ({
+      return this.setState(prev => ({
         cartBookCount: prev.cartBookCount + value.quantity
-      })))
-    })
+      }));
+    });
   };
 
   homePage = () => {
     this.props.history.push({
       pathname: "/"
-    })
-  }
+    });
+  };
 
+  customerDetails = async prop => {
+    await this.setState({ customerDetails: prop });
+  };
+
+  checkout = async () => {
+    await this.state.bookBunch.map(value => {
+      this.state.orderDetails.push({
+        bookIds: value.id,
+        noOfCopies: value.quantity,
+        orderPrice: this.state.updateCartSubtotal,
+        customerName: this.state.customerDetails.Name,
+        mobileNo: this.state.customerDetails.PhoneNumber,
+        pincode: this.state.customerDetails.Pincode,
+        locality: this.state.customerDetails.Locality,
+        address: this.state.customerDetails.Address,
+        city: this.state.customerDetails.City,
+        town: this.state.customerDetails.Town,
+        type: this.state.customerDetails.Type
+      });
+    });
+    await addOrderData(this.state.orderDetails).then(res => {
+      localStorage.clear();
+      localStorage.setItem("orderId", res.data.orderBookDetail);
+    }).catch( err => {
+
+    });
+  };
 
   render() {
     return (
@@ -91,16 +126,18 @@ export class Cart extends Component {
             removeBook={this.removeBook}
             updateQuantity={this.updateQuantity}
             updateBookQuantity={this.updateBookQuantity}
-
           />
           <ControlledExpansionPanels
             expanded={this.state.expanded}
             handleExpantion={this.handleExpantion}
+            customerDetails={this.customerDetails}
           />
           <OrderSummary
             books={this.state.bookBunch}
             subTotal={this.state.cartSubTotal}
             expanded2={this.state.expanded2}
+            checkout={this.checkout}
+            booksInCart={this.state.cartBookCount}
           />
         </div>
         <Footer />

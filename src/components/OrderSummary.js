@@ -4,6 +4,7 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   root: {
@@ -35,16 +36,36 @@ class OrderSummary extends React.Component {
             {this.props.books.map(value => {
               return (
                 <div className="bookDivHolder">
-                  <img src={value.bookImageSrc} className="cartBookImg" alt="bookImage" />
+                  <img
+                    src={value.bookImageSrc}
+                    className="cartBookImg"
+                    alt="bookImage"
+                  />
                   <div className="cartBookDetails">
                     <h5 className="titleFont">{value.bookName}</h5>
                     <p className="authorFont"> {value.authorName}</p>
-                    <h4 className="priceFont">Rs.{value.bookPrice}    &#215;  {value.quantity}   </h4>
+                    <h4 className="priceFont">
+                      Rs.{value.bookPrice} &#215; {value.quantity}{" "}
+                    </h4>
                   </div>
                 </div>
               );
             })}
-            <h4><b>Subtotal: {this.props.subTotal}</b></h4>
+            <h4>
+              <b>Subtotal: {this.props.subTotal}</b>
+            </h4>
+            {this.props.booksInCart !== 0 ? (
+              <Button
+                className={classes.button}
+                className="checkoutButton"
+                variant="contained"
+                color="primary"
+                id="onSumbit"
+                onClick={this.props.checkout}
+              >
+                Checkout{" "}
+              </Button>
+            ) : null}
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>

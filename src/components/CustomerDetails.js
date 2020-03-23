@@ -194,6 +194,7 @@ class ControlledExpansionPanels extends React.Component {
     document.getElementById("onSumbit").style.display = "none";
     this.props.handleExpantion("expanded2");
     localStorage.setItem('customerDetails', JSON.stringify(this.state))
+    this.props.customerDetails(this.state)
   };
 
   editDetails = () => {

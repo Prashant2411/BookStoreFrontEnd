@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import ListOfBooks from "../components/ListOfBooks";
 import AppBar from "../components/AppBar";
 import { getBookList, getBooksCount } from "../Configuration/BookConfig";
-import getSearchedBooks from "../Configuration/Search";
 import Styles from "../css/snackbar.module.css";
 import Footer from "./Footer";
-import { getSortedBookList } from "../Configuration/BookConfig";
+import { getSortedBookList, getSearchedBooks } from "../Configuration/BookConfig";
 
 class BookStoreFronPage extends Component {
   constructor(props) {
@@ -32,7 +31,6 @@ class BookStoreFronPage extends Component {
     this.setState({ cartBooks: this.state.cartBooks })
     localStorage.setItem('cartBook',JSON.stringify(this.state.cartBooks))
     this.setState({ cartBooksCount: this.state.cartBooks.length })
-    // console.log(JSON.parse(localStorage.getItem('cartBook')),"demo")
   };
 
   sortData = value => {
