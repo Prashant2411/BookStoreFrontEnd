@@ -109,7 +109,7 @@ class PrimarySearchAppBar extends Component {
 
     this.state = {
       searchKey: "",
-      status: "Your Ca rt is Empty",
+      status: "Your Cart is Empty",
       isActive: false,
     }
 

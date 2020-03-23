@@ -2,7 +2,7 @@ const axios = require('axios');
 export function getBookList(pageNo){
     return axios({
         method: 'get',
-        url:"http://localhost:8080/bookstore/allbooks/"+pageNo
+        url:"http://localhost:8080/bookstore/books/"+pageNo
     })
 }
 
@@ -16,7 +16,7 @@ export function getSearchedBooks(attribute,pageNo) {
 export function getBooksCount(attribute) {
     return axios({
         method: "get",
-        url: "http://localhost:8080/bookstore/bookcount/" + attribute
+        url: "http://localhost:8080/bookstore/count/" + attribute
     })
 }
 
@@ -30,6 +30,6 @@ export function getSortAttribute() {
 export function getSortedBookList(attribute,pageNo){
     return axios({
         method: "get",
-        url: "http://localhost:8080/bookstore/sortattribute/"+attribute+"/"+pageNo
+        url: "http://localhost:8080/bookstore/sort/"+attribute+"/"+pageNo
     })
 }
