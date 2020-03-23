@@ -36,7 +36,6 @@ export class CartBook extends Component {
     increaseCount = async () => {
         if (this.props.param.noOfCopies > this.props.param.quantity) {
             await this.props.updateBookQuantity(this.props.param.id, this.props.param.quantity + 1)
-            console.log(this.props.param.quantity)
             this.props.updateCartSubtotal()
         }
     }

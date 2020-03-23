@@ -93,6 +93,7 @@ class ControlledExpansionPanels extends React.Component {
     formValid: true,
     status: "",
     isActive: false,
+    newObject:[]
   };
 
   openSnackBar = async (prop) => {
@@ -177,6 +178,29 @@ class ControlledExpansionPanels extends React.Component {
     document.getElementById("edit").style.display = "block";
     document.getElementById("onSumbit").style.display = "none";
     this.props.handleExpantion("expanded2");
+
+   
+
+
+    const items = this.props.orderData.map(
+      value => (this.state.newObject[value.bookId]={
+        bookIds:value.bookId,
+        noOfCopies:value.quantity,
+        orderPrice: this.props.updateCartSubtotal,
+        customerName: this.state.Name,
+        mobileNo: this.state.PhoneNumber,
+         pincode: this.state.Pincode,
+        locality: this.state.Locality,
+       address: this.state.Address,
+       city: this.state.City,
+       town: this.state.Town,
+       type: this.state.Type
+      })
+    )
+
+    this.props.newData(this.state.newObject);
+    
+
   };
 
   editDetails = () => {
@@ -328,7 +352,9 @@ class ControlledExpansionPanels extends React.Component {
               variant="contained"
               color="primary"
               id="onSumbit"
+
               onClick={this.buttonPressed}
+              
             >
               Continue
             </Button>

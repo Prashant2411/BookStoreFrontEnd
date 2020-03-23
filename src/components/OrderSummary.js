@@ -4,6 +4,10 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import {addOrderData} from '../Configuration/orderBookConfig'
+
+
 
 const styles = theme => ({
   root: {
@@ -16,10 +20,46 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "33.33%",
     flexShrink: 0
-  }
+  },
+  button: {
+    margin: "0 0 0 120%",
+    
+    [theme.breakpoints.up("md")]: {
+      margin: "0 0 0 100%"
+    }
+  },
+  
 });
 
 class OrderSummary extends React.Component {
+  constructor(props) {
+    super(props)  
+    
+    this.state={
+      orderId:0
+    }
+  }
+
+  checkout = async(object ) => {
+
+    console.log("data     ",this.props.newObject)
+
+   // Object.keys(event).map( data => addOrderData(event[data]))
+console.log("event     ",object)
+
+    addOrderData(this.props.newObject)
+  //   .then(res => {
+  //     this.setState({ orderId: res.data });
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   })
+   }
+
+
+  
+
+  
   render() {
     const { classes } = this.props;
 
@@ -45,6 +85,10 @@ class OrderSummary extends React.Component {
               );
             })}
             <h4><b>Subtotal: {this.props.subTotal}</b></h4>
+          
+            <Button className={classes.button} className="checkoutButton"
+                variant="contained"color="primary"id="onSumbit"onClick={this.checkout}>
+                    Checkout  </Button> 
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -53,3 +97,6 @@ class OrderSummary extends React.Component {
 }
 
 export default withStyles(styles)(OrderSummary);
+
+
+ 

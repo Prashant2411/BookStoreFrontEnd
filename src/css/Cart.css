@@ -144,7 +144,12 @@ input[type=number]::-webkit-outer-spin-button {
     height: 40px;
     align-self: flex-end;
 }
-
+.checkoutButton{
+    outline: none;
+    width: 150px;
+    height: 40px;
+    align-self: flex-end;
+}
 .bookDivHolder{
     display: flex;
     flex-direction: row;

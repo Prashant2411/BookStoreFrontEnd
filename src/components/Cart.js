@@ -16,6 +16,8 @@ export class Cart extends Component {
       cartSubTotal: 0,
       expanded: false,
       expanded2: false,
+      orderData:[],
+      newObject:[]
     };
   }
 
@@ -29,7 +31,7 @@ export class Cart extends Component {
   }
 
   updateBookQuantity = async (bookId, bookQuantity) => {
-    console.log("hii im in updateBookQ", bookId, bookQuantity);
+     console.log("hii im in updateBookQ", bookId, bookQuantity);
     const index = this.state.bookBunch.findIndex((book) => {
       return book.id === bookId
     })
@@ -38,7 +40,15 @@ export class Cart extends Component {
     const books = Object.assign([], this.state.bookBunch);
     books[index] = book;
     await this.setState({ bookBunch: books })
-    console.log(this.state.bookBunch, "value");
+    console.log("main data     ",this.state.bookBunch);
+
+  const items= this.state.bookBunch.map(
+      value => (this.state.orderData[value.id])={
+        bookId:value.id,
+        quantity:value.quantity
+      }
+    )
+  console.log("order data   ",this.state.orderData)
   }
 
   removeBook = prop => {
@@ -79,6 +89,13 @@ export class Cart extends Component {
         })
   }
 
+  newData= (data )=>{
+    this.setState({
+      newObject:data
+    })
+    
+  }
+
 
   render() {
     return (
@@ -99,10 +116,14 @@ export class Cart extends Component {
 
           />
           <ControlledExpansionPanels
+            orderData={this.state.orderData}
+            newData={this.newData}
+            updateCartSubtotal={this.state.cartSubTotal}
             expanded={this.state.expanded}
             handleExpantion={this.handleExpantion}
           />
           <OrderSummary
+            newObject={this.state.newObject}
             books={this.state.bookBunch}
             subTotal={this.state.cartSubTotal}
             expanded2={this.state.expanded2}
