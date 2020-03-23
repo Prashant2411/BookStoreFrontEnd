@@ -13,8 +13,6 @@ import Styles from "../css/snackbar.module.css";
 import { withRouter } from 'react-router-dom'
 import '../css/BookDetails.css'
 
-
-
 const useStyles = theme => ({
   grow: {
     flexGrow: 1
@@ -86,11 +84,14 @@ const useStyles = theme => ({
   },
   cartIcon: {
     margin: "0 0 0 15%",
-    color: "white"
+    color: "white",
   },
   appBar: {
     backgroundColor: "#990033",
     position: "fixed",
+    // display:"flex",
+    // flexDirection:"row",
+    // justifyContent:'space-between'
   }
 });
 

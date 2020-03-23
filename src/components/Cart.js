@@ -21,15 +21,14 @@ export class Cart extends Component {
 
   UNSAFE_componentWillMount() {
     this.props.history.location.state.map((value, index) => {
-      this.setState((prev) => ({
+      return (this.setState((prev) => ({
         cartSubTotal: prev.cartSubTotal + value.bookPrice
-      }))
+      })))
     })
     this.updateQuantity()
   }
 
   updateBookQuantity = async (bookId, bookQuantity) => {
-    console.log("hii im in updateBookQ", bookId, bookQuantity);
     const index = this.state.bookBunch.findIndex((book) => {
       return book.id === bookId
     })
@@ -38,7 +37,6 @@ export class Cart extends Component {
     const books = Object.assign([], this.state.bookBunch);
     books[index] = book;
     await this.setState({ bookBunch: books })
-    console.log(this.state.bookBunch, "value");
   }
 
   removeBook = prop => {
@@ -50,9 +48,9 @@ export class Cart extends Component {
   updateCartSubtotal = async () => {
     await this.setState({ cartSubTotal: 0 })
     await this.state.bookBunch.map((value, index) => {
-      this.setState((prev) => ({
+      return (this.setState((prev) => ({
         cartSubTotal: prev.cartSubTotal + value.bookPrice * value.quantity
-      }))
+      })))
     })
     await this.updateQuantity()
   };
@@ -66,17 +64,17 @@ export class Cart extends Component {
   updateQuantity = async () => {
     await this.setState({ cartBookCount: 0 })
     await this.state.bookBunch.map((value, index) => {
-      this.setState((prev) => ({
+      return (this.setState((prev) => ({
         cartBookCount: prev.cartBookCount + value.quantity
-      }))
+      })))
     })
   };
 
   homePage = () => {
-        this.props.history.push({
-          pathname: "/",
-          state: this.state.bookBunch
-        })
+    this.props.history.push({
+      pathname: "/",
+      state: this.state.bookBunch
+    })
   }
 
 
@@ -85,7 +83,7 @@ export class Cart extends Component {
       <Fragment>
         <AppBar
           cartBooks={this.state.bookBunch}
-          cartBooksCount={this.state.cartBookCount}
+          cartBooksCount={this.state.bookBunch.length}
           homePage={this.homePage}
         />
         <div className="CartDiv">
