@@ -111,7 +111,6 @@ class PrimarySearchAppBar extends Component {
       searchKey: "",
       status: "Your Ca rt is Empty",
       isActive: false,
-      cartBooks: this.props.cartBooks
     }
 
   }
@@ -135,22 +134,13 @@ class PrimarySearchAppBar extends Component {
   }
 
   goToCart = () => {
-    console.log(this.props)
-    if (this.props.history.location.pathname === "/") {
-      this.props.history.push({
-        pathname: "/cart",
-        state: this.props.cartBooks
-
-      })
-    }
+    if (this.props.history.location.pathname === "/")
+      this.props.goToCart()
   }
 
   homePage = (event) => {
     if (this.props.history.location.pathname === "/cart") {
-      this.props.history.push({
-        pathname: "/",
-        state: this.props.cartBooks
-      })
+       this.props.homePage()
     }
   }
 
@@ -178,8 +168,8 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <IconButton aria-label="cart" className={classes.cartIcon} onClick={(this.state.cartBooks.length > 0) ? this.goToCart : this.openSnackBar}>
-              <StyledBadge badgeContent={this.state.cartBooks.length} color="secondary">
+            <IconButton aria-label="cart" className={classes.cartIcon} onClick={(this.props.cartBooksCount > 0) ? this.goToCart : this.openSnackBar}>
+              <StyledBadge badgeContent={this.props.cartBooksCount} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>
             </IconButton>

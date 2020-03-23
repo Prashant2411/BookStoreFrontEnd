@@ -22,13 +22,15 @@ class BookStoreFronPage extends Component {
       displayType: "allBooks",
       keyword: "",
       sortType: "",
+      cartBooksCount: 0
     };
   }
 
   setCartBooks = prop => {
-    prop.quantity= 1
+    prop.quantity = 1
     this.state.cartBooks.push(prop)
     this.setState({ cartBooks: this.state.cartBooks })
+    this.setState({ cartBooksCount: this.state.cartBooks.length })
   };
 
   sortData = value => {
@@ -64,7 +66,20 @@ class BookStoreFronPage extends Component {
   UNSAFE_componentWillMount() {
     this.getBookLists();
     this.totalItems("");
+    if (this.props.location.state !== undefined) {
+      this.setState({ cartBooks: this.props.location.state })
+      this.updateQuantity()
+    }
   }
+
+  updateQuantity = async () => {
+    await this.setState({ cartBookCount: 0 })
+    await this.state.cartBooks.map((value, index) => {
+      this.setState((prev) => ({
+        cartBooksCount: prev.cartBooksCount + value.quantity
+      }))
+    })
+  };
 
   totalItems = async attribute => {
     await getBooksCount(attribute).then(res => {
@@ -98,6 +113,14 @@ class BookStoreFronPage extends Component {
     });
   };
 
+  goToCart = (prop) => {
+    this.props.history.push({
+      pathname: "/cart",
+      state: this.state.cartBooks
+    })
+
+  }
+
   render() {
     return (
       <div>
@@ -105,8 +128,8 @@ class BookStoreFronPage extends Component {
           searchBookList={this.getSearchedBookList}
           bookList={this.getBookLists}
           displayType={this.updateDisplayType}
-          cartBooks={this.state.cartBooks}
-          cartBooksCount={this.state.cartBooks.length}
+          cartBooksCount={this.state.cartBooksCount}
+          goToCart={this.goToCart}
         />
         <ListOfBooks
           bookList={this.state.bookList}

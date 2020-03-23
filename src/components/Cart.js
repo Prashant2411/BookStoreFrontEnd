@@ -12,7 +12,7 @@ export class Cart extends Component {
     super(props);
     this.state = {
       bookBunch: this.props.history.location.state,
-      cartBooks: this.props.history.location.state.length,
+      cartBookCount: this.props.history.location.state.length,
       cartSubTotal: 0,
       expanded: false,
       expanded2: false,
@@ -64,20 +64,29 @@ export class Cart extends Component {
   };
 
   updateQuantity = async () => {
-    await this.setState({ cartBooks: 0 })
+    await this.setState({ cartBookCount: 0 })
     await this.state.bookBunch.map((value, index) => {
       this.setState((prev) => ({
-        cartBooks: prev.cartBooks + value.quantity
+        cartBookCount: prev.cartBookCount + value.quantity
       }))
     })
   };
+
+  homePage = () => {
+        this.props.history.push({
+          pathname: "/",
+          state: this.state.bookBunch
+        })
+  }
+
 
   render() {
     return (
       <Fragment>
         <AppBar
           cartBooks={this.state.bookBunch}
-          cartBooksCount={this.state.cartBooks}
+          cartBooksCount={this.state.cartBookCount}
+          homePage={this.homePage}
         />
         <div className="CartDiv">
           <CartDetails
