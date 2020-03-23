@@ -94,7 +94,21 @@ class ControlledExpansionPanels extends React.Component {
     status: "",
     isActive: false,
   };
-
+  UNSAFE_componentWillMount() {
+    if (localStorage.getItem('customerDetails')) {
+      this.customerData = JSON.parse(localStorage.getItem('customerDetails'))
+      this.setState({
+        Name: this.customerData.Name,
+        PhoneNumber: this.customerData.PhoneNumber,
+        Pincode: this.customerData.Pincode,
+        Locality: this.customerData.Locality,
+        Address: this.customerData.Address,
+        City: this.customerData.City,
+        Town: this.customerData.Town,
+        Type: this.customerData.Type
+      })
+    }
+  }
   openSnackBar = async (prop) => {
     await this.setState({ status: prop })
     this.setState({ isActive: true }, () => {
@@ -187,7 +201,9 @@ class ControlledExpansionPanels extends React.Component {
 
   updateState = event => {
     this.setState({ [event.target.name]: event.target.value });
+    localStorage.setItem('customerDetails', JSON.stringify(this.state))
   };
+
 
   render() {
     const { classes } = this.props;
@@ -262,6 +278,7 @@ class ControlledExpansionPanels extends React.Component {
               arial-label="Address"
               rowsMin={4}
               id="customerDetails4"
+              value={this.state.Address}
               name="Address"
               onChange={this.updateState}
               rowsMax={4}
@@ -300,6 +317,7 @@ class ControlledExpansionPanels extends React.Component {
             <RadioGroup
               aria-label="Type"
               name="Type"
+              defaultValue={this.state.Type}
               className={classes.group}
               onChange={this.updateState}
               row

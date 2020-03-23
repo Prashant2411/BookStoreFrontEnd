@@ -118,9 +118,7 @@ class BookStoreFronPage extends Component {
   goToCart = (prop) => {
     this.props.history.push({
       pathname: "/cart",
-      state: this.state.cartBooks
     })
-
   }
 
   render() {

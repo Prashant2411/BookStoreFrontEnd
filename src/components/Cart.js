@@ -70,8 +70,7 @@ export class Cart extends Component {
 
   homePage = () => {
     this.props.history.push({
-      pathname: "/",
-      state: this.state.bookBunch
+      pathname: "/"
     })
   }
 
