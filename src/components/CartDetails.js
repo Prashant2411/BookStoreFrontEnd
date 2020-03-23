@@ -16,7 +16,7 @@ export class CartDetails extends Component {
     render() {
         return (
             <div className="cartDetailsDiv">
-                <h4 className="MyCartH">My Cart ({this.props.books.cartBooks})</h4>
+                <h4 className="MyCartH">My Cart ({this.props.books.bookBunch.length})</h4>
                 {(this.props.books.bookBunch.length > 0) ?
                     this.props.books.bookBunch.map(value => {
                         return (

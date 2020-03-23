@@ -11,8 +11,8 @@ export class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookBunch: this.props.history.location.state,
-      cartBookCount: this.props.history.location.state.length,
+      bookBunch: JSON.parse(localStorage.getItem('cartBook')),
+      cartBookCount: JSON.parse(localStorage.getItem('cartBook')).length,
       cartSubTotal: 0,
       expanded: false,
       expanded2: false,
@@ -20,11 +20,7 @@ export class Cart extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.props.history.location.state.map((value, index) => {
-      return (this.setState((prev) => ({
-        cartSubTotal: prev.cartSubTotal + value.bookPrice
-      })))
-    })
+    this.updateCartSubtotal();
     this.updateQuantity()
   }
 
@@ -37,12 +33,14 @@ export class Cart extends Component {
     const books = Object.assign([], this.state.bookBunch);
     books[index] = book;
     await this.setState({ bookBunch: books })
+    await localStorage.setItem('cartBook',JSON.stringify(this.state.bookBunch))
   }
 
-  removeBook = prop => {
-    this.setState(prevState => ({
+  removeBook = async (prop) =>  {
+    await this.setState(prevState => ({
       bookBunch: prevState.bookBunch.filter(el => el.bookName !== prop.bookName)
     }));
+    await localStorage.setItem('cartBook',JSON.stringify(this.state.bookBunch))
   };
 
   updateCartSubtotal = async () => {

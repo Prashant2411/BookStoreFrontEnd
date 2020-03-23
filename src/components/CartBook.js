@@ -17,7 +17,7 @@ export class CartBook extends Component {
 
     inputValue = async (event) => {
         return this.props.param.quantity < 1 || this.props.param.quantity > this.props.param.noOfCopies
-            ? this.props.updateBookQuantity(this.props.param.id, 1) : this.inputHandler(event.target.value);
+            ? this.props.updateBookQuantity(this.props.param.id, 1) : this.inputHandler(parseInt(event.target.value));
     }
 
     inputHandler = (event) => {

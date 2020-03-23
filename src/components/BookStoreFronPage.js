@@ -30,7 +30,9 @@ class BookStoreFronPage extends Component {
     prop.quantity = 1
     this.state.cartBooks.push(prop)
     this.setState({ cartBooks: this.state.cartBooks })
+    localStorage.setItem('cartBook',JSON.stringify(this.state.cartBooks))
     this.setState({ cartBooksCount: this.state.cartBooks.length })
+    console.log(JSON.parse(localStorage.getItem('cartBook')),"demo")
   };
 
   sortData = value => {
@@ -66,8 +68,8 @@ class BookStoreFronPage extends Component {
   UNSAFE_componentWillMount() {
     this.getBookLists();
     this.totalItems("");
-    if (this.props.location.state !== undefined) {
-      this.setState({ cartBooks: this.props.location.state })
+    if (localStorage.getItem('cartBook')) {
+      this.setState({ cartBooks: JSON.parse(localStorage.getItem('cartBook')) })
       this.updateQuantity()
     }
   }
@@ -128,7 +130,7 @@ class BookStoreFronPage extends Component {
           searchBookList={this.getSearchedBookList}
           bookList={this.getBookLists}
           displayType={this.updateDisplayType}
-          cartBooksCount={this.state.cartBooksCount}
+          cartBooksCount={this.state.cartBooks.length}
           goToCart={this.goToCart}
         />
         <ListOfBooks
