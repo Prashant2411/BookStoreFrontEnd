@@ -8,9 +8,9 @@ const style = theme => ({
   button: {
     margin: "0 1% 0 0",
     width: "200px",
-    backgroundColor: "#990033",
+    backgroundColor: "rgb(47,115,183)",
     "&:hover": {
-      backgroundColor: "#990000",
+      backgroundColor: "rgb(30,80,183)",
       color: "#FFF"
     }
   }

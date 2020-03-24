@@ -12,12 +12,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Styles from "../css/snackbar.module.css";
 import { withRouter } from 'react-router-dom'
 import '../css/BookDetails.css'
-
-
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = theme => ({
   grow: {
     flexGrow: 1
+  },
+  grow1: {
+    flexGrow: 0.17
   },
   title: {
     display: "none",
@@ -54,7 +56,8 @@ const useStyles = theme => ({
     zIndex: 1
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
+    padding: theme.spacing(1, 1, 1, 9),
+    justifyContent:'center',
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
@@ -77,22 +80,23 @@ const useStyles = theme => ({
     }
   },
   bookIcon: {
-    padding: "0 0 0 2%",
+    // padding: "0 0 0 2%",
     fontSize: "36px",
     [theme.breakpoints.up("sm")]: {
-      padding: "0 0 0 10%",
+      // padding: "0 0 0 10%",
       fontSize: "36px"
     }
   },
   cartIcon: {
-    margin: "0 0 0 15%",
+    // margin: "0 0 0 15%",
     color: "white"
   },
   cartIcon1: {
-    margin: "0 0 0 62%",
+    // margin: "0 0 0 62%",
     color: "white"
   },
   appBar: {
+    padding:'0 10%',
     backgroundColor: "#990033",
     position: "fixed",
     display:"flex",
@@ -155,11 +159,13 @@ class PrimarySearchAppBar extends Component {
     return (
       <div className={classes.grow}>
         <AppBar position="static" className={classes.appBar}>
-          <Toolbar>
+          <Toolbar >
+          
             <MenuBookIcon className={classes.bookIcon} onClick={this.homePage} />
             <Typography className={classes.title} value="1" variant="h6" noWrap onClick={this.homePage}>
               BookStore
             </Typography>
+            <div className={classes.grow1} />
             <div className={(this.props.history.location.pathname === "/") ? classes.search : "hidden"}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -174,12 +180,13 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
+            <div className={classes.grow} />
             <IconButton aria-label="cart" className={(this.props.history.location.pathname === "/") ? classes.cartIcon : classes.cartIcon1} onClick={(this.props.cartBooksCount > 0) ? this.goToCart : this.openSnackBar}>
               <StyledBadge badgeContent={this.props.cartBooksCount} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>
             </IconButton>
-            <div className={classes.grow} />
+            
           </Toolbar>
         </AppBar>
 

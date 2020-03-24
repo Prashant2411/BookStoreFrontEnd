@@ -10,9 +10,9 @@ import shadows from "@material-ui/core/styles/shadows";
 
 const styles = theme => ({
   button: {
-    backgroundColor: "#990033",
+    backgroundColor: "rgb(47,115,183)",
     "&:hover": {
-      backgroundColor: "#990000",
+      backgroundColor: "rgb(30,80,183)",
       color: "#FFF"
     }
   }

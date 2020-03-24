@@ -52,27 +52,27 @@ export class BookDetails extends Component {
             {this.state.stock === 0 ? (
               <h3 className="outOfStock">Out Of Stock</h3>
             ) : (
-              <h1> </h1>
-            )}
+                <h1> </h1>
+              )}
           </div>
         </Tooltip>
         <div className="propertyHolderDiv">
-        <div className="bookProperty">
-          <p className="titleFont">{this.props.bookList.bookName}</p>
-          <br />
-          <p className="authorFont">{this.props.bookList.authorName}</p>
-          <br />
-          <p className="priceFont">Rs. {this.props.bookList.bookPrice}</p>
-        </div>
-        <div className="bookDivButton">
-          {this.state.isInCart === true ? (
-            <InCart />
-          ) : this.state.stock > 0 ? (
-            <InStock addToCart={this.addToCart} book={this.props.bookList} />
-          ) : (
-            <OutOfStock />
-          )}
-        </div>
+          <div className="bookProperty">
+            <p className="titleFont">{this.props.bookList.bookName}</p>
+            <br />
+            <p className="authorFont">{this.props.bookList.authorName}</p>
+            <br />
+            <p className="priceFont">Rs. {this.props.bookList.bookPrice}</p>
+          </div>
+          <div className="bookDivButton">
+            {this.state.isInCart === true ? (
+              <InCart />
+            ) : this.state.stock > 0 ? (
+              <InStock addToCart={this.addToCart} book={this.props.bookList} />
+            ) : (
+                  <OutOfStock />
+                )}
+          </div>
         </div>
       </div>
     );
