@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import BookStoreFronPage from './components/BookStoreFronPage'
+import OrderSuccessfull from './components/OrderSuccessfull'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Cart from './components/Cart'
 
@@ -11,6 +12,7 @@ function App() {
         <Switch>
           <Route path={"/"} exact component={BookStoreFronPage} />
           <Route path={"/cart"} exact component={Cart} />
+          <Route path={"/ordersuccessfull"} exact component={OrderSuccessfull} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -24,7 +24,7 @@ function InCart() {
     return (
         <React.Fragment>
             <div className="bookDivButton">
-            <StyledButton style={{background:"#0000ff",border:"1px solid black",width:"170px"}}>Added In Your Cart</StyledButton>
+            <StyledButton style={{background:"rgb(47,115,183)",border:"1px solid black",width:"170px"}}>Added In Your Cart</StyledButton>
             </div>
         </React.Fragment>
     )

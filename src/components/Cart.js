@@ -12,7 +12,7 @@ export class Cart extends Component {
     super(props);
     this.state = {
       bookBunch: JSON.parse(localStorage.getItem("cartBook")),
-      cartBookCount: JSON.parse(localStorage.getItem("cartBook")).length,
+      cartBookCount: JSON.parse(localStorage.getItem("cartBook")),
       cartSubTotal: 0,
       expanded: false,
       expanded2: false,
@@ -21,9 +21,15 @@ export class Cart extends Component {
     };
   }
 
-  UNSAFE_componentWillMount() {
-    this.updateCartSubtotal();
-    this.updateQuantity();
+  UNSAFE_componentWillMount=async()=>{
+    if (localStorage.getItem('cartBook')) {
+       await this.setState({bookBunch:JSON.parse(localStorage.getItem("cartBook"))})
+       await this.setState({cartBookCount:JSON.parse(localStorage.getItem("cartBook")).length})
+       await this.updateCartSubtotal();
+       await this.updateQuantity();
+    }else{
+      this.homePage()
+    }
   }
 
   updateBookQuantity = async (bookId, bookQuantity) => {
@@ -82,6 +88,12 @@ export class Cart extends Component {
     });
   };
 
+  orderSuccessfull = () => {
+    this.props.history.push({
+      pathname: "/ordersuccessfull"
+    });
+  };
+
   customerDetails = async prop => {
     await this.setState({ customerDetails: prop });
   };
@@ -108,14 +120,16 @@ export class Cart extends Component {
     }).catch( err => {
 
     });
+    await this.orderSuccessfull()
+
   };
 
   render() {
     return (
       <Fragment>
         <AppBar
-          cartBooks={this.state.bookBunch}
-          cartBooksCount={this.state.bookBunch.length}
+          cartBooks={(this.state.bookBunch !== null) ? this.state.bookBunch : []}
+          cartBooksCount={(this.state.bookBunch !== null) ? this.state.bookBunch.length : 0}
           homePage={this.homePage}
         />
         <div className="CartDiv">

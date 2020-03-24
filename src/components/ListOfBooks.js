@@ -29,8 +29,10 @@ export class ListOfBooks extends Component {
                         <DropDownList sortData={this.props.sortData} />
                     </div>
                     {books}
+                    <div className="paginationDiv">
                     <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)}
                         onChange={this.props.handleChange} />
+                        </div>
                 </div>
             </React.Fragment>
         )

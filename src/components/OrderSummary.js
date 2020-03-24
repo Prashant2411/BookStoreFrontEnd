@@ -44,7 +44,7 @@ class OrderSummary extends React.Component {
                   <div className="cartBookDetails">
                     <h5 className="titleFont">{value.bookName}</h5>
                     <p className="authorFont"> {value.authorName}</p>
-                    <h4 className="priceFont">
+                    <h4 className="priceFontCart">
                       Rs.{value.bookPrice} &#215; {value.quantity}{" "}
                     </h4>
                   </div>
@@ -57,7 +57,7 @@ class OrderSummary extends React.Component {
             {this.props.booksInCart !== 0 ? (
               <Button
                 className={classes.button}
-                className="checkoutButton"
+                // className="checkoutButton"
                 variant="contained"
                 color="primary"
                 id="onSumbit"

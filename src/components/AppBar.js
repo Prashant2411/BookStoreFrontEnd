@@ -145,7 +145,7 @@ class PrimarySearchAppBar extends Component {
   }
 
   homePage = (event) => {
-    if (this.props.history.location.pathname === "/cart") {
+    if (this.props.history.location.pathname !== "/") {
        this.props.homePage()
     }
   }

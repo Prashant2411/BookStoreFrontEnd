@@ -28,7 +28,8 @@ export class CartDetails extends Component {
                     }
                     ) : <h3>Your cart is empty</h3>}
                 <h3 className="subTotal">SubTotal : {this.props.books.cartSubTotal}</h3>
-                {(this.props.books.bookBunch.length > 0) ? <Button onClick={this.handleExpantion} id="placeOrderButton" variant="contained" className="placeOrderButton" color="primary" >
+                {(this.props.books.bookBunch.length > 0) ? 
+                <Button onClick={this.handleExpantion} id="placeOrderButton" variant="contained" className="placeOrderButton" color="primary" >
                     PLACE ORDER
                 </Button> : <h6> </h6>}
             </div>

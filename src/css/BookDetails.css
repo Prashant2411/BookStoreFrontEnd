@@ -11,10 +11,25 @@
     
 }
 
+@media only screen and (min-width: 1024px) {
+    .listDiv{
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        margin: auto ;
+        width: 1024px;
+        padding-top: 70px;
+        padding-bottom: 60px;
+        
+    } 
+}
+
 .bookDiv{
     width: 200px;
     border: 2px solid #E8E8E8;
-    margin: 2%;
+    margin: 2.5%;
     background-color: rgb(238, 236, 236);
     border-radius: 5px;
 }
@@ -22,7 +37,7 @@
 .bookDiv:hover{
     width: 200px;
     border: 2px solid #E8E8E8;
-    margin: 2%;
+    margin: 2.5%;
     background-color: rgb(238, 236, 236);
     border-radius: 5px;
     box-shadow: 3px 3px 5px 6px grey;
@@ -79,7 +94,7 @@
     font-size: 14px;
     margin: 5px 0 0 0;
     padding-bottom: 8px;
-    line-height: 0;
+    line-height: 0px;
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
@@ -158,9 +173,16 @@
 
   .pagination{
     display: inline-block;
-    position: fixed;
+    /* position: fixed; */
     bottom: 45px;
   }
+
+  .paginationDiv{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    bottom: 45px;
+}
 
  @media only screen and (max-width: 600px) {
  .bookItemsDiv{
@@ -192,3 +214,4 @@
     font-size: 80%;
  }
  .hidden { display:none; }
+
