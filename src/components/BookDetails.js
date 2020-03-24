@@ -56,12 +56,13 @@ export class BookDetails extends Component {
             )}
           </div>
         </Tooltip>
+        <div className="propertyHolderDiv">
         <div className="bookProperty">
           <p className="titleFont">{this.props.bookList.bookName}</p>
           <br />
           <p className="authorFont">{this.props.bookList.authorName}</p>
           <br />
-          <p className="priceFont">Rs.{this.props.bookList.bookPrice}</p>
+          <p className="priceFont">Rs. {this.props.bookList.bookPrice}</p>
         </div>
         <div className="bookDivButton">
           {this.state.isInCart === true ? (
@@ -71,6 +72,7 @@ export class BookDetails extends Component {
           ) : (
             <OutOfStock />
           )}
+        </div>
         </div>
       </div>
     );

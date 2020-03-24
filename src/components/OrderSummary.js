@@ -58,8 +58,8 @@ class OrderSummary extends React.Component {
                       alt="bookImage"
                     />
                     <div className="cartBookDetails">
-                      <h5 className="titleFont">{value.bookName}</h5>
-                      <p className="authorFont"> {value.authorName}</p>
+                      <h5 className="titleFont1">{value.bookName}</h5>
+                      <p className="authorFont1"> {value.authorName}</p>
                       <h4 className="priceFontCart">
                         Rs.{value.bookPrice} &#215; {value.quantity}{" "}
                       </h4>

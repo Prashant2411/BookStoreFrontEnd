@@ -99,21 +99,22 @@ export class Cart extends Component {
   };
 
   checkout = async () => {
-    await this.state.bookBunch.map(value => {
+    await JSON.parse(localStorage.getItem("cartBook")).map(value => {
       this.state.orderDetails.push({
         bookIds: value.id,
         noOfCopies: value.quantity,
         orderPrice: this.state.updateCartSubtotal,
-        customerName: this.state.customerDetails.Name,
-        mobileNo: this.state.customerDetails.PhoneNumber,
-        pincode: this.state.customerDetails.Pincode,
-        locality: this.state.customerDetails.Locality,
-        address: this.state.customerDetails.Address,
-        city: this.state.customerDetails.City,
-        town: this.state.customerDetails.Town,
-        type: this.state.customerDetails.Type
+        customerName: JSON.parse(localStorage.getItem("customerDetails")).Name,
+        mobileNo: JSON.parse(localStorage.getItem("customerDetails")).PhoneNumber,
+        pincode: JSON.parse(localStorage.getItem("customerDetails")).Pincode,
+        locality: JSON.parse(localStorage.getItem("customerDetails")).Locality,
+        address: JSON.parse(localStorage.getItem("customerDetails")).Address,
+        city: JSON.parse(localStorage.getItem("customerDetails")).City,
+        town: JSON.parse(localStorage.getItem("customerDetails")).Town,
+        type: JSON.parse(localStorage.getItem("customerDetails")).Type
       });
     });
+    console.log(this.state.orderDetails)
     await addOrderData(this.state.orderDetails).then(res => {
       localStorage.clear();
       localStorage.setItem("orderId", res.data.orderBookDetail);

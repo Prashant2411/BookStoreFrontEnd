@@ -5,17 +5,16 @@ import { withStyles } from '@material-ui/core/styles';
 const StyledButton = withStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    borderRadius: 3,
+    borderRadius: 2,
     fontSize: "11px",
     // fontFamily: "roboto",
     marginTop: "5px",
-    marginBottom: "5px",
+    marginBottom: "20px",
     border: 0,
     color: 'white',
-    height: 24,
-    padding:"0px",
-    
-    width: "90px"
+    height: 29,
+    padding:"1px",
+    width: "92px"
   },
   label: {
     textTransform: 'capitalize',
