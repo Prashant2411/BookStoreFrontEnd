@@ -12,7 +12,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
 import Styles from "../css/snackbar.module.css";
-
+import Grid from "@material-ui/core/Grid";
 
 const ids = [
   "customerDetails",
@@ -40,16 +40,13 @@ const styles = theme => ({
     flexShrink: 0
   },
   textarea: {
-    width: "94%",
+    width: "99.3%",
+    marginTop: "2%",
     borderRadius: "3px",
-    margin: "2% 0% 0% 1.5%",
     resize: "none"
   },
   textField: {
-    marginTop: "2%",
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "46%"
+    width: "100%"
   },
   radioButton: {
     margin: "0 15% 0 1%"
@@ -58,14 +55,9 @@ const styles = theme => ({
     margin: "0 0 0 2%",
     paddingBottom: 0
   },
-  group: {
-    margin: `${theme.spacing(1)}px 0`
-  },
   button: {
-    margin: "0 0 0 60%",
-    [theme.breakpoints.up("md")]: {
-      margin: "0 0 0 100%"
-    }
+    margin: "0 1% 0 0",
+    width: "200px"
   },
   edit: {
     paddingTop: "0.5%",
@@ -73,9 +65,6 @@ const styles = theme => ({
     fontSize: "80%",
     display: "none ",
     cursor: "pointer"
-  },
-  form: {
-    margin: "0 0 0 17%"
   }
 });
 
@@ -92,11 +81,11 @@ class ControlledExpansionPanels extends React.Component {
     expanded: false,
     formValid: true,
     status: "",
-    isActive: false,
+    isActive: false
   };
   UNSAFE_componentWillMount() {
-    if (localStorage.getItem('customerDetails')) {
-      this.customerData = JSON.parse(localStorage.getItem('customerDetails'))
+    if (localStorage.getItem("customerDetails")) {
+      this.customerData = JSON.parse(localStorage.getItem("customerDetails"));
       this.setState({
         Name: this.customerData.Name,
         PhoneNumber: this.customerData.PhoneNumber,
@@ -105,14 +94,12 @@ class ControlledExpansionPanels extends React.Component {
         Address: this.customerData.Address,
         City: this.customerData.City,
         Town: this.customerData.Town,
-        Type: this.customerData.Type,
-        // expanded: this.customerData.expanded,
-        // formValid: this.customerData.formValid,
-      })
+        Type: this.customerData.Type
+      });
     }
   }
-  openSnackBar = async (prop) => {
-    await this.setState({ status: prop })
+  openSnackBar = async prop => {
+    await this.setState({ status: prop });
     this.setState({ isActive: true }, () => {
       setTimeout(() => {
         this.setState({ isActive: false });
@@ -167,7 +154,7 @@ class ControlledExpansionPanels extends React.Component {
   };
 
   buttonPressed = async event => {
-    this.setState({ formValid: true })
+    this.setState({ formValid: true });
     await ids
       .filter(value => {
         if (
@@ -175,14 +162,14 @@ class ControlledExpansionPanels extends React.Component {
           value === "customerDetails8" ||
           value === "customerDetails7"
         ) {
-
           return false;
         }
         return true;
-      }).map(value =>
+      })
+      .map(value =>
         document.getElementById(value).checkValidity() === false
           ? this.setState({ formValid: false })
-          : null,
+          : null
       );
     await this.validateRadioButton();
     if (this.state.formValid === false) {
@@ -193,25 +180,22 @@ class ControlledExpansionPanels extends React.Component {
     document.getElementById("edit").style.display = "block";
     document.getElementById("onSumbit").style.display = "none";
     this.props.handleExpantion("expanded2");
-    localStorage.setItem('customerDetails', JSON.stringify(this.state))
-    this.props.customerDetails(this.state)
+    localStorage.setItem("customerDetails", JSON.stringify(this.state));
+    this.props.customerDetails(this.state);
   };
 
   editDetails = () => {
     ids.map(values => (document.getElementById(values).disabled = false));
     document.getElementById("edit").style.display = "none";
-    document.getElementById("onSumbit").style.display = "none";
+    document.getElementById("onSumbit").style.display = "block";
   };
 
   updateState = event => {
     this.setState({ [event.target.name]: event.target.value });
-    
   };
-
 
   render() {
     const { classes } = this.props;
-
     return (
       <ExpansionPanel className={classes.root} expanded={this.props.expanded}>
         <ExpansionPanelSummary>
@@ -223,139 +207,164 @@ class ControlledExpansionPanels extends React.Component {
           </label>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <form className={classes.form}>
-            <TextField
-              label="Name"
-              type="text"
-              className={classes.textField}
-              value={this.state.Name}
-              name="Name"
-              id="customerDetails"
-              onBlur={this.validate}
-              onChange={this.updateState}
-              margin="normal"
-              variant="outlined"
-              required
-            />
-            <TextField
-              label="Phone Number"
-              type="text"
-              name="PhoneNumber"
-              id="customerDetails1"
-              value={this.state.PhoneNumber}
-              onBlur={this.validatePhoneNumbeer}
-              onChange={this.updateState}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-              required
-            />
-            <br />
-            <TextField
-              label="Pincode"
-              type="text"
-              id="customerDetails2"
-              name="Pincode"
-              value={this.state.Pincode}
-              onBlur={this.validatePinCode}
-              onChange={this.updateState}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-              required
-            />
-            <TextField
-              label="Locality"
-              className={classes.textField}
-              id="customerDetails3"
-              name="Locality"
-              value={this.state.Locality}
-              onBlur={this.validate}
-              onChange={this.updateState}
-              margin="normal"
-              variant="outlined"
-              required
-            />
-            <br />
-            <TextareaAutosize
-              className={classes.textarea}
-              arial-label="Address"
-              rowsMin={4}
-              id="customerDetails4"
-              value={this.state.Address}
-              name="Address"
-              onChange={this.updateState}
-              rowsMax={4}
-              placeholder="Address*"
-              variant="outlined"
-              required
-            />
-            <br />
-            <TextField
-              label="City"
-              id="customerDetails5"
-              className={classes.textField}
-              name="City"
-              value={this.state.City}
-              onBlur={this.validate}
-              onChange={this.updateState}
-              margin="normal"
-              variant="outlined"
-              required
-            />
-            <TextField
-              label="Town"
-              className={classes.textField}
-              name="Town"
-              id="customerDetails6"
-              value={this.state.Town}
-              onBlur={this.validate}
-              onChange={this.updateState}
-              margin="normal"
-              variant="outlined"
-              required
-            />
-            <br />
-            <FormLabel className={classes.addressType}>Type</FormLabel>
-            <br />
-            <RadioGroup
-              aria-label="Type"
-              name="Type"
-              defaultValue={this.state.Type}
-              className={classes.group}
-              onChange={this.updateState}
-              row
+          <Grid
+            container
+            spacing={1}
+            direction="row"
+            justify="space-evenly"
+            alignItems="center"
+          >
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Name"
+                type="text"
+                className={classes.textField}
+                value={this.state.Name}
+                name="Name"
+                id="customerDetails"
+                onBlur={this.validate}
+                onChange={this.updateState}
+                margin="normal"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Phone Number"
+                type="text"
+                name="PhoneNumber"
+                id="customerDetails1"
+                value={this.state.PhoneNumber}
+                onBlur={this.validatePhoneNumbeer}
+                onChange={this.updateState}
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Pincode"
+                type="text"
+                id="customerDetails2"
+                name="Pincode"
+                value={this.state.Pincode}
+                onBlur={this.validatePinCode}
+                onChange={this.updateState}
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Locality"
+                className={classes.textField}
+                id="customerDetails3"
+                name="Locality"
+                value={this.state.Locality}
+                onBlur={this.validate}
+                onChange={this.updateState}
+                margin="normal"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextareaAutosize
+                className={classes.textarea}
+                arial-label="Address"
+                rowsMin={4}
+                id="customerDetails4"
+                value={this.state.Address}
+                name="Address"
+                onChange={this.updateState}
+                rowsMax={4}
+                placeholder="Address*"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="City"
+                id="customerDetails5"
+                className={classes.textField}
+                name="City"
+                value={this.state.City}
+                onBlur={this.validate}
+                onChange={this.updateState}
+                margin="normal"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Town"
+                className={classes.textField}
+                name="Town"
+                id="customerDetails6"
+                value={this.state.Town}
+                onBlur={this.validate}
+                onChange={this.updateState}
+                margin="normal"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormLabel className={classes.addressType}>Type</FormLabel>
+              <RadioGroup
+                aria-label="Type"
+                name="Type"
+                defaultValue={this.state.Type}
+                className={classes.group}
+                onChange={this.updateState}
+                row
+              >
+                <FormControlLabel
+                  className={classes.radioButton}
+                  value="Home"
+                  control={<Radio color="primary" id="customerDetails7" />}
+                  label="Home"
+                />
+                <FormControlLabel
+                  className={classes.radioButton}
+                  value="Work"
+                  control={<Radio color="primary" id="customerDetails8" />}
+                  label="Work"
+                />
+                <FormControlLabel
+                  className={classes.radioButton}
+                  value="Other"
+                  control={<Radio color="primary" id="customerDetails9" />}
+                  label="Other"
+                />
+              </RadioGroup>
+            </Grid>
+            <Grid
+              container
+              direction="row"
+              justify="flex-end"
+              alignItems="flex-end"
             >
-              <FormControlLabel
-                className={classes.radioButton}
-                value="Home"
-                control={<Radio color="primary" id="customerDetails7" />}
-                label="Home"
-              />
-              <FormControlLabel
-                className={classes.radioButton}
-                value="Work"
-                control={<Radio color="primary" id="customerDetails8" />}
-                label="Work"
-              />
-              <FormControlLabel
-                className={classes.radioButton}
-                value="Other"
-                control={<Radio color="primary" id="customerDetails9" />}
-                label="Other"
-              />
-            </RadioGroup>
-            <Button
-              className={classes.button}
-              variant="contained"
-              color="primary"
-              id="onSumbit"
-              onClick={this.buttonPressed}
-            >
-              Continue
-            </Button>
-          </form>
+              <Button
+                className={classes.button}
+                variant="contained"
+                color="primary"
+                id="onSumbit"
+                onClick={this.buttonPressed}
+              >
+                Continue
+              </Button>
+            </Grid>
+          </Grid>
         </ExpansionPanelDetails>
+
         <div
           className={
             this.state.isActive

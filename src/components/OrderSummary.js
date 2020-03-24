@@ -5,6 +5,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   root: {
@@ -17,6 +18,10 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "33.33%",
     flexShrink: 0
+  },
+  button: {
+    margin: "0 1% 0 0",
+    width: "200px"
   }
 });
 
@@ -32,41 +37,54 @@ class OrderSummary extends React.Component {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <div className="bookDivHolder1">
-            {this.props.books.map(value => {
-              return (
-                <div className="bookDivHolder">
-                  <img
-                    src={value.bookImageSrc}
-                    className="cartBookImg"
-                    alt="bookImage"
-                  />
-                  <div className="cartBookDetails">
-                    <h5 className="titleFont">{value.bookName}</h5>
-                    <p className="authorFont"> {value.authorName}</p>
-                    <h4 className="priceFontCart">
-                      Rs.{value.bookPrice} &#215; {value.quantity}{" "}
-                    </h4>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
+            <div className="bookDivHolder1">
+              {this.props.books.map(value => {
+                return (
+                  <div className="bookDivHolder">
+                    <img
+                      src={value.bookImageSrc}
+                      className="cartBookImg"
+                      alt="bookImage"
+                    />
+                    <div className="cartBookDetails">
+                      <h5 className="titleFont">{value.bookName}</h5>
+                      <p className="authorFont"> {value.authorName}</p>
+                      <h4 className="priceFontCart">
+                        Rs.{value.bookPrice} &#215; {value.quantity}{" "}
+                      </h4>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            <h4>
-              <b>Subtotal: {this.props.subTotal}</b>
-            </h4>
+                );
+              })}
+              <h4>
+                <b>Subtotal: {this.props.subTotal}</b>
+              </h4>
+            </div>
             {this.props.booksInCart !== 0 ? (
-              <Button
-                className={classes.button}
-                // className="checkoutButton"
-                variant="contained"
-                color="primary"
-                id="onSumbit"
-                onClick={this.props.checkout}
+              <Grid
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="flex-end"
               >
-                Checkout{" "}
-              </Button>
+                <Button
+                  onClick={this.props.checkout}
+                  id="placeOrderButton"
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  CHECKOUT
+                </Button>
+              </Grid>
             ) : null}
-          </div>
+          </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
