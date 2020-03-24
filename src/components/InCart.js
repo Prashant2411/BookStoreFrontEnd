@@ -6,14 +6,13 @@ const StyledButton = withStyles({
       background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
       borderRadius: 3,
       fontSize:"11px",
-      fontFamily:"roboto",
+      // fontFamily:"roboto",
       marginTop:"5px",
       marginBottom:"5px",
       border: 0,
       color: 'white',
       height: 24,
-      fontWeight:"bold",
-      paddingTop:"3px",
+      paddingTop:"2px",
       width:"80px"
     },
     label: {
@@ -24,7 +23,7 @@ function InCart() {
     return (
         <React.Fragment>
             <div className="bookDivButton">
-            <StyledButton style={{background:"rgb(47,115,183)",border:"1px solid black",width:"170px"}}>Added In Your Cart</StyledButton>
+            <StyledButton style={{background:"rgb(47,115,183)",border:"1px solid black",width:"170px"}}>ADDED TO CART</StyledButton>
             </div>
         </React.Fragment>
     )

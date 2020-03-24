@@ -54,9 +54,12 @@ class OrderSummary extends React.Component {
             <h4>
               <b>Subtotal: {this.props.subTotal}</b>
             </h4>
-            {this.props.booksInCart !== 0 ? (
+
+          </div>
+          {this.props.booksInCart !== 0 ? (
+            <div className="orderSuccessfullButtonDiv" >
               <Button
-                className={classes.button}
+                className="orderSuccessfullButton"
                 // className="checkoutButton"
                 variant="contained"
                 color="primary"
@@ -65,8 +68,8 @@ class OrderSummary extends React.Component {
               >
                 Checkout{" "}
               </Button>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );

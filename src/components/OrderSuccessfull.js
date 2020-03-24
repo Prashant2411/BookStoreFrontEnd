@@ -50,9 +50,11 @@ export class OrderSuccessfull extends Component {
               Mumbai, Maharashtra 400088</td>
             </tr>
           </table>
-          <button class="successfullButton successfullButton1" onClick={this.homePage}>Continue Shopping</button>
-          {/* <Button onClick={this.handleExpantion} id="placeOrderButton" variant="contained"
-           className="orderSuccessfullButton" color="primary" >Continue Shopping</Button> */}
+          {/* <button class="successfullButton successfullButton1" onClick={this.homePage}>Continue Shopping</button> */}
+          <div className="orderSuccessfullButtonDiv">
+          <Button onClick={this.homePage} id="placeOrderButton" variant="contained"
+           className="orderSuccessfullButton" color="primary" >Continue Shopping</Button>
+           </div>
         </div>
         <Footer />
       </Fragment>

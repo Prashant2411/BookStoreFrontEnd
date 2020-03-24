@@ -345,8 +345,9 @@ class ControlledExpansionPanels extends React.Component {
                 label="Other"
               />
             </RadioGroup>
+            <div className="cartButtonDiv1" >
             <Button
-              className={classes.button}
+              className="orderSuccessfullButton"
               variant="contained"
               color="primary"
               id="onSumbit"
@@ -354,6 +355,8 @@ class ControlledExpansionPanels extends React.Component {
             >
               Continue
             </Button>
+            </div>
+
           </form>
         </ExpansionPanelDetails>
         <div

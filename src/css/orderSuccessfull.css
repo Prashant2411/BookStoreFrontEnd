@@ -99,4 +99,13 @@ table, td, th {
     width: 200px;
     height: 40px;
     align-self: center;
+    background-color: #990033;
+}
+
+.orderSuccessfullButtonDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-self:flex-end;
 }

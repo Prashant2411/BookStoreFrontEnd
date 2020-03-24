@@ -7,15 +7,15 @@ const StyledButton = withStyles({
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     borderRadius: 3,
     fontSize: "11px",
-    fontFamily: "roboto",
+    // fontFamily: "roboto",
     marginTop: "5px",
     marginBottom: "5px",
     border: 0,
     color: 'white',
     height: 24,
-    fontWeight: "bold",
-    paddingTop: "3px",
-    width: "80px"
+    padding:"0px",
+    
+    width: "90px"
   },
   label: {
     textTransform: 'capitalize',
@@ -25,8 +25,8 @@ function InStock(props) {
   return (
     <React.Fragment>
       <div className="bookDivButton">
-        <StyledButton style={{ background: "#990033" }} onClick={props.addToCart}>Add To Cart</StyledButton>
-        <StyledButton style={{ background: "white", color: "black", border: "1px solid black" }}>Wish List</StyledButton>
+        <StyledButton style={{ background: "#990033" }} onClick={props.addToCart}>ADD TO CART</StyledButton>
+        <StyledButton style={{ background: "white", color: "black", border: "1px solid black" }}>WISH LIST</StyledButton>
       </div>
     </React.Fragment>
   )
