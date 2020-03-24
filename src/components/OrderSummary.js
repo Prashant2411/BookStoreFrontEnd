@@ -21,7 +21,12 @@ const styles = theme => ({
   },
   button: {
     margin: "0 1% 0 0",
-    width: "200px"
+    width: "200px",
+    backgroundColor: "#990033",
+    "&:hover": {
+      backgroundColor: "#990000",
+      color: "#FFF"
+    }
   }
 });
 
