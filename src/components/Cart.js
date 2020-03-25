@@ -103,11 +103,12 @@ export class Cart extends Component {
       this.state.orderDetails.push({
         bookIds: value.id,
         noOfCopies: value.quantity,
-        orderPrice: this.state.updateCartSubtotal,
+        orderPrice: this.state.cartSubTotal,
         customerName: JSON.parse(localStorage.getItem("customerDetails")).Name,
         mobileNo: JSON.parse(localStorage.getItem("customerDetails")).PhoneNumber,
         pincode: JSON.parse(localStorage.getItem("customerDetails")).Pincode,
         locality: JSON.parse(localStorage.getItem("customerDetails")).Locality,
+        mailId: JSON.parse(localStorage.getItem("customerDetails")).EmailAddress,
         address: JSON.parse(localStorage.getItem("customerDetails")).Address,
         city: JSON.parse(localStorage.getItem("customerDetails")).City,
         town: JSON.parse(localStorage.getItem("customerDetails")).Town,

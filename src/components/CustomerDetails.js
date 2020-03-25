@@ -24,7 +24,8 @@ const ids = [
   "customerDetails6",
   "customerDetails7",
   "customerDetails8",
-  "customerDetails9"
+  "customerDetails9",
+  "customerDetails10"
 ];
 
 const styles = theme => ({
@@ -79,6 +80,7 @@ class ControlledExpansionPanels extends React.Component {
     PhoneNumber: "",
     Pincode: "",
     Locality: "",
+    EmailAddress: "",
     Address: "",
     City: "",
     Town: "",
@@ -96,6 +98,7 @@ class ControlledExpansionPanels extends React.Component {
         PhoneNumber: this.customerData.PhoneNumber,
         Pincode: this.customerData.Pincode,
         Locality: this.customerData.Locality,
+        EmailAddress: this.customerData.EmailAddress,
         Address: this.customerData.Address,
         City: this.customerData.City,
         Town: this.customerData.Town,
@@ -122,6 +125,17 @@ class ControlledExpansionPanels extends React.Component {
       });
     }
   };
+
+  validateEmailAddress = e =>{
+    const regexp3 = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    const char = e.target.value;
+    if (!regexp3.test(char)) {
+      this.openSnackBar("Invalid Email Address");
+      this.setState({
+        [e.target.name]: ""
+      });
+    }
+  }
 
   validatePhoneNumbeer = e => {
     const regexp1 = /[5-9]\d{9}$/;
@@ -272,6 +286,20 @@ class ControlledExpansionPanels extends React.Component {
                 name="Locality"
                 value={this.state.Locality}
                 onBlur={this.validate}
+                onChange={this.updateState}
+                margin="normal"
+                variant="outlined"
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="EmailAddress"
+                className={classes.textField}
+                id="customerDetails10"
+                name="EmailAddress"
+                value={this.state.EmailAddress}
+                onBlur={this.validateEmailAddress}
                 onChange={this.updateState}
                 margin="normal"
                 variant="outlined"
