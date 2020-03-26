@@ -50,7 +50,7 @@ export class CartDetails extends Component {
         ) : (
           <DialogBox homePage={this.props.homePage}/>
         )}
-        <h3 className="subTotal">SubTotal : {this.props.books.cartSubTotal}</h3>
+        <h4 className="subTotal">SubTotal : {this.props.books.cartSubTotal}</h4>
         {this.props.books.bookBunch.length > 0 ? (
           <Grid
             container

@@ -15,7 +15,7 @@ const styles = theme => ({
     boxShadow: "1px 1px 1px 1px lightgray"
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(16),
     flexBasis: "33.33%",
     flexShrink: 0
   },

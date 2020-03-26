@@ -32,8 +32,9 @@ class BookStoreFronPage extends Component {
     this.setState({ cartBooksCount: this.state.cartBooks.length })
   };
 
-  sortData = value => {
-    this.setState({ sortType: value, displayType: "sortBooks" });
+  sortData = async value => {
+    await this.setState({ sortType: value, displayType: "sortBooks" });
+    await localStorage.setItem('sortBooks',JSON.stringify(this.state.sortType));
     getSortedBookList(value, this.state.page)
       .then(res => {
         this.setState({ bookList: res.data });
@@ -68,6 +69,9 @@ class BookStoreFronPage extends Component {
     if (localStorage.getItem('cartBook')) {
       this.setState({ cartBooks: JSON.parse(localStorage.getItem('cartBook')) })
       this.updateQuantity()
+    }
+    if(localStorage.getItem('sortBooks')){
+      this.sortData(JSON.parse(localStorage.getItem('sortBooks')))
     }
   }
 

@@ -8,7 +8,7 @@ import Cart from './components/Cart'
 
 function App() {
   return (
-    <div class="appDiv">
+    <div className="appDiv">
       <BrowserRouter>
         <Switch>
           <Route path={"/"} exact component={BookStoreFronPage} />

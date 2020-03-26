@@ -17,7 +17,7 @@
 
 .cartDetailsDiv{
     border: 2px solid lightgray;
-    padding: 2% 3%;
+    padding: 2% 24px;
     display: flex;
     flex-direction: column;
     box-shadow: 0.5px 0.5px 1px 1px lightgray;
