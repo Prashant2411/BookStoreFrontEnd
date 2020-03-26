@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 const StyledButton = withStyles({
     root: {
-      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
       borderRadius: 2,
       fontSize:"11px",
       // fontFamily:"roboto",
@@ -14,9 +13,6 @@ const StyledButton = withStyles({
       height: 29,
       paddingTop:"5px",
       width:"195px"
-    },
-    label: {
-      textTransform: 'capitalize',
     },
   })(Button);
 function InCart() {

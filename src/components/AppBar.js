@@ -15,16 +15,11 @@ import '../css/BookDetails.css'
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = theme => ({
-  grow: {
-    flexGrow: 1
-  },
-  grow1: {
-    flexGrow: 0.17
-  },
   title: {
     display: "none",
     paddingLeft: "0.5%",
     fontSize: "140%",
+    overflow:"visible",
     [theme.breakpoints.up("sm")]: {
       display: "block"
     },
@@ -80,28 +75,32 @@ const useStyles = theme => ({
     }
   },
   bookIcon: {
-    // padding: "0 0 0 2%",
     fontSize: "36px",
     [theme.breakpoints.up("sm")]: {
-      // padding: "0 0 0 10%",
       fontSize: "36px"
     }
   },
   cartIcon: {
-    // margin: "0 0 0 15%",
-    color: "white"
-  },
-  cartIcon1: {
-    // margin: "0 0 0 62%",
-    color: "white"
+    color: "white",
+    marginLeft:"0%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft:"10%",
+    }
   },
   appBar: {
     padding:'0 10%',
     backgroundColor: "#990033",
-    position: "fixed",
+  },
+  toolbar:{
     display:"flex",
-    justifyContent:"center"
+    justifyContent:"space-between"
+  },
+  gridDiv:{
+    width: "auto",
+    flexWrap: "noWrap",
+    
   }
+
 });
 
 const StyledBadge = withStyles(theme => ({
@@ -157,15 +156,15 @@ class PrimarySearchAppBar extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.grow}>
+      <div>
         <AppBar position="static" className={classes.appBar}>
-          <Toolbar >
-          
+          <Toolbar className={classes.toolbar}>
+          <Grid container className={classes.gridDiv}>
             <MenuBookIcon className={classes.bookIcon} onClick={this.homePage} />
             <Typography className={classes.title} value="1" variant="h6" noWrap onClick={this.homePage}>
               BookStore
             </Typography>
-            <div className={classes.grow1} />
+            </Grid>
             <div className={(this.props.history.location.pathname === "/") ? classes.search : "hidden"}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -180,8 +179,7 @@ class PrimarySearchAppBar extends Component {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <div className={classes.grow} />
-            <IconButton aria-label="cart" className={(this.props.history.location.pathname === "/") ? classes.cartIcon : classes.cartIcon1} onClick={(this.props.cartBooksCount > 0) ? this.goToCart : this.openSnackBar}>
+            <IconButton aria-label="cart" className={classes.cartIcon} onClick={(this.props.cartBooksCount > 0) ? this.goToCart : this.openSnackBar}>
               <StyledBadge badgeContent={this.props.cartBooksCount} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </StyledBadge>

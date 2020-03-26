@@ -1,11 +1,10 @@
 
 @media only screen and (min-width: 600px) {
     .CartDiv{
-        margin: auto;
+        margin: 0 auto;
         width: 70%;
         max-width: 1024px;
-        padding: 5%;
-        height: auto;
+        padding: 15px;
     }
 }
 

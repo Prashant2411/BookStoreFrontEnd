@@ -3,7 +3,6 @@ import ListOfBooks from "../components/ListOfBooks";
 import AppBar from "../components/AppBar";
 import { getBookList, getBooksCount } from "../Configuration/BookConfig";
 import Styles from "../css/snackbar.module.css";
-import Footer from "./Footer";
 import { getSortedBookList, getSearchedBooks } from "../Configuration/BookConfig";
 
 class BookStoreFronPage extends Component {
@@ -146,7 +145,6 @@ class BookStoreFronPage extends Component {
         >
           {this.state.status}
         </div>
-        <Footer />
       </div>
     );
   }

@@ -73,7 +73,7 @@ export class OrderSuccessfull extends Component {
             </Button>
           </Grid>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </Fragment>
     );
   }

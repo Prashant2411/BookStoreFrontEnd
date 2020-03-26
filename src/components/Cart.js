@@ -4,7 +4,6 @@ import ControlledExpansionPanels from "./CustomerDetails";
 import "../css/Cart.css";
 import OrderSummary from "./OrderSummary";
 import AppBar from "./AppBar";
-import Footer from "./Footer";
 import { addOrderData } from "../Configuration/BookConfig";
 
 export class Cart extends Component {
@@ -155,7 +154,6 @@ export class Cart extends Component {
             booksInCart={this.state.cartBookCount}
           />
         </div>
-        <Footer />
       </Fragment>
     );
   }

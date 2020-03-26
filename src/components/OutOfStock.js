@@ -14,9 +14,6 @@ const StyledButton = withStyles({
       paddingTop:"5px",
       width:"195px"
     },
-    label: {
-      textTransform: 'capitalize',
-    },
   })(Button);
 function OutOfStock() {
     return (

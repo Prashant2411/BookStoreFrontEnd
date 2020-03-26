@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 const StyledButton = withStyles({
   root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     borderRadius: 2,
     fontSize: "11px",
     // fontFamily: "roboto",
@@ -14,10 +13,7 @@ const StyledButton = withStyles({
     color: 'white',
     height: 29,
     padding:"1px",
-    width: "92px"
-  },
-  label: {
-    textTransform: 'capitalize',
+    width: "92px",
   },
 })(Button);
 function InStock(props) {
