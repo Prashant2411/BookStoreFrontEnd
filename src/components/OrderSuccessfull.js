@@ -2,11 +2,9 @@ import React, { Component, Fragment } from "react";
 import success from "../asserts/success1.png";
 import "../css/orderSuccessfull.css";
 import AppBar from "./AppBar";
-import Footer from "./Footer";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import shadows from "@material-ui/core/styles/shadows";
 
 const styles = theme => ({
   button: {
@@ -40,9 +38,10 @@ export class OrderSuccessfull extends Component {
         <AppBar homePage={this.homePage} />
         <div className="successDiv">
           <img className="successImg" src={success} alt="SuccessfullImage" />
-          <h2 className="successH3">Order Placed Successfully</h2>
+          <p className="successH3">Order Placed Successfully</p>
           <p className="paragraph">
-            hurray!!! your order is confirmed the order id {this.state.orderId}.
+            hurray!!! your order is confirmed<br/> 
+            the order id #{this.state.orderId} save the order id <br/>
             for further communication..
           </p>
 

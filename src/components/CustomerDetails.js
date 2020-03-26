@@ -44,7 +44,7 @@ const styles = theme => ({
     width: "99.3%",
     marginTop: "2%",
     borderRadius: "3px",
-    resize: "none"
+    resize: "none",
   },
   textField: {
     width: "100%"
@@ -292,7 +292,7 @@ class ControlledExpansionPanels extends React.Component {
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 label="EmailAddress"
                 className={classes.textField}

@@ -1,6 +1,5 @@
 import React from "react";
 import '../css/BookDetails.css'
-import Grid from "@material-ui/core/Grid";
 
 export default function Footer() {
   return (
