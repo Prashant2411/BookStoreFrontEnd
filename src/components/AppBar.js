@@ -51,9 +51,10 @@ const useStyles = theme => ({
     zIndex: 1
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 9),
+    padding: theme.spacing(1, 1, 1, 6),
     justifyContent:'center',
     transition: theme.transitions.create("width"),
+    paddingRight:30,
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: 400
@@ -98,7 +99,7 @@ const useStyles = theme => ({
   gridDiv:{
     width: "auto",
     flexWrap: "noWrap",
-    
+    alignItems:"center"
   }
 
 });
