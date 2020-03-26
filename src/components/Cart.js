@@ -141,6 +141,7 @@ export class Cart extends Component {
             removeBook={this.removeBook}
             updateQuantity={this.updateQuantity}
             updateBookQuantity={this.updateBookQuantity}
+            homePage={this.homePage}
           />
           <ControlledExpansionPanels
             expanded={this.state.expanded}

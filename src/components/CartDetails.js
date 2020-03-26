@@ -3,6 +3,7 @@ import CartBook from "./CartBook";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import DialogBox from "./DialogBox"
 
 const style = theme => ({
   button: {
@@ -47,7 +48,7 @@ export class CartDetails extends Component {
             );
           })
         ) : (
-          <h3>Your cart is empty</h3>
+          <DialogBox homePage={this.props.homePage}/>
         )}
         <h3 className="subTotal">SubTotal : {this.props.books.cartSubTotal}</h3>
         {this.props.books.bookBunch.length > 0 ? (
