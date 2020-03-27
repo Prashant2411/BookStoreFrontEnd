@@ -127,7 +127,7 @@ class ControlledExpansionPanels extends React.Component {
   };
 
   validateEmailAddress = e =>{
-    const regexp3 = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    const regexp3=/^[a-zA-Z]+[.+-]?[a-zA-Z0-9]+[@][a-zA-Z]{3,}[.][a-z]{2,4}[.]?[a-zA-Z]*[.,]?$/
     const char = e.target.value;
     if (!regexp3.test(char)) {
       this.openSnackBar("Invalid Email Address");
@@ -138,7 +138,7 @@ class ControlledExpansionPanels extends React.Component {
   }
 
   validatePhoneNumbeer = e => {
-    const regexp1 = /[5-9]\d{9}$/;
+    const regexp1 = /^[5-9]\d{9}$/;
     const char = e.target.value;
     if (!regexp1.test(char)) {
       this.openSnackBar("Invalid Phone Number");
@@ -150,11 +150,11 @@ class ControlledExpansionPanels extends React.Component {
   };
 
   validatePinCode = e => {
-    const regexp2 = /[1-9]\d{5}$/;
+    const regexp2 = /^[1-9]\d{5}$/;
     const char = e.target.value;
     if (!regexp2.test(char)) {
       document.getElementById(e.target.id).style.border = "red";
-      this.openSnackBar("Invalid Data");
+      this.openSnackBar("Invalid PinCode");
       this.setState({
         [e.target.name]: ""
       });
