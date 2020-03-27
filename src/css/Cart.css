@@ -5,6 +5,7 @@
         width: 70%;
         max-width: 1024px;
         padding: 15px;
+        margin-top: 80px;
     }
 }
 
@@ -12,6 +13,7 @@
     .CartDiv{
         margin: auto;
         width: 96%; 
+        margin-top: 80px;
     }
 }
 

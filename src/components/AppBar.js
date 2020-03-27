@@ -91,6 +91,7 @@ const useStyles = theme => ({
   appBar: {
     padding:'0 10%',
     backgroundColor: "#990033",
+    position:"fixed"
   },
   toolbar:{
     display:"flex",
