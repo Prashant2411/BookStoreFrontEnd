@@ -20,6 +20,7 @@ const useStyles = theme => ({
     paddingLeft: "0.5%",
     fontSize: "140%",
     overflow:"visible",
+    marginTop:"5px",
     [theme.breakpoints.up("sm")]: {
       display: "block"
     },

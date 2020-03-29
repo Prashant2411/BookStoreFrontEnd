@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import minus from '../asserts/minus.png'
 import plus from '../asserts/plus.png'
+import Styles from "../css/snackbar.module.css";
+
 
 export class CartBook extends Component {
     constructor(props) {
@@ -10,7 +12,9 @@ export class CartBook extends Component {
             bookCount: this.props.param.quantity,
             nUnitOfBookPrice: this.props.param.bookPrice,
             prevValue: this.props.param.bookPrice,
-            quantity: 1
+            quantity: 1,
+            status: "",
+            isActive: false,
         }
         this.timer = null;
     }
@@ -21,7 +25,7 @@ export class CartBook extends Component {
     }
 
     inputHandler = (event) => {
-        this.props.updateBookQuantity(this.props.param.id,event)
+        this.props.updateBookQuantity(this.props.param.id, event)
         this.props.updateCartSubtotal()
     }
 
@@ -31,6 +35,10 @@ export class CartBook extends Component {
             await this.props.updateBookQuantity(this.props.param.id, this.props.param.quantity - 1)
             this.props.updateCartSubtotal()
         }
+        else {
+            await this.setState({ status: "Already a unit in your cart" });
+            this.openSnackBar();
+        }
     }
 
     increaseCount = async () => {
@@ -38,6 +46,9 @@ export class CartBook extends Component {
             await this.props.updateBookQuantity(this.props.param.id, this.props.param.quantity + 1)
             console.log(this.props.param.quantity)
             this.props.updateCartSubtotal()
+        } else {
+            await this.setState({ status: "Only " + this.props.param.noOfCopies + " quantity left in our stock" });
+            this.openSnackBar();
         }
     }
 
@@ -45,6 +56,14 @@ export class CartBook extends Component {
         this.props.removeBook(this.props.param)
         this.props.updateCartSubtotal()
     }
+
+    openSnackBar = () => {
+        this.setState({ isActive: true }, () => {
+            setTimeout(() => {
+                this.setState({ isActive: false });
+            }, 3000);
+        });
+    };
 
     render() {
         return (
@@ -67,6 +86,15 @@ export class CartBook extends Component {
                         </button>
                         <p className="removeFont" onClick={this.removeBookEvent}>Remove</p>
                     </div>
+                </div>
+                <div
+                    className={
+                        this.state.isActive
+                            ? [Styles.snackbar, Styles.show].join(" ")
+                            : Styles.snackbar
+                    }
+                >
+                    {this.state.status}
                 </div>
             </div>
         )

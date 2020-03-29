@@ -20,13 +20,13 @@ export class Cart extends Component {
     };
   }
 
-  UNSAFE_componentWillMount=async()=>{
+  UNSAFE_componentWillMount = async () => {
     if (localStorage.getItem('cartBook')) {
-       await this.setState({bookBunch:JSON.parse(localStorage.getItem("cartBook"))})
-       await this.setState({cartBookCount:JSON.parse(localStorage.getItem("cartBook")).length})
-       await this.updateCartSubtotal();
-       await this.updateQuantity();
-    }else{
+      await this.setState({ bookBunch: JSON.parse(localStorage.getItem("cartBook")) })
+      await this.setState({ cartBookCount: JSON.parse(localStorage.getItem("cartBook")).length })
+      await this.updateCartSubtotal();
+      await this.updateQuantity();
+    } else {
       this.homePage()
     }
   }
@@ -118,7 +118,7 @@ export class Cart extends Component {
     await addOrderData(this.state.orderDetails).then(res => {
       localStorage.clear();
       localStorage.setItem("orderId", res.data.orderBookDetail);
-    }).catch( err => {
+    }).catch(err => {
 
     });
     await this.orderSuccessfull()

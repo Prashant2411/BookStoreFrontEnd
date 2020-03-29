@@ -5,6 +5,8 @@ import Select from "@material-ui/core/Select";
 import { getSortAttribute } from "../Configuration/BookConfig";
 import InputLabel from "@material-ui/core/InputLabel";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+
 const theme1 = createMuiTheme({
   overrides: {
     MuiSelect: {
@@ -51,11 +53,12 @@ class NativeSelects extends React.Component {
   state = {
     name: "hai",
     labelWidth: 0,
-    sortBy: []
+    sortBy: [],
+    sortKey:"",
   };
 
-  UNSAFE_componentWillMount() {
-    getSortAttribute()
+  UNSAFE_componentWillMount = async() =>{
+    await getSortAttribute()
       .then(res => {
         this.setState({
           sortBy: res.data
@@ -64,23 +67,31 @@ class NativeSelects extends React.Component {
       .catch(err => {
         console.log(err);
       });
+      if(localStorage.getItem('sortBooks')){
+        console.log(JSON.parse(localStorage.getItem('sortBooks')))
+        this.setState({sortKey:JSON.parse(localStorage.getItem('sortBooks'))})
+      } else{
+        this.setState({sortKey:this.state.sortBy[0]})
+      }
+      
   }
 
   sortData = event => {
     this.props.sortData(event.target.value);
+    this.setState({sortKey:event.target.value})
   };
 
   render() {
     const { classes } = this.props;
     const sortBy = this.state.sortBy.map(values => {
-      return  <option key={values.id} style={{cursor:"pointer"}}value={values}>{values}</option>
+      return  <MenuItem key={values.id} style={{cursor:"pointer"}}value={values}>{values}</MenuItem>
     })
     return (
       <MuiThemeProvider theme={theme1}>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="SortByRelevance" className={classes.label}><b>SORT BY</b></InputLabel>
         <Select
-          value={this.state.sortBy[0]}
+          value={this.state.sortKey}
           onChange={this.sortData}
           name="sort"
           className={classes.selectEmpty}
