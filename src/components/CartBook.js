@@ -21,12 +21,24 @@ export class CartBook extends Component {
 
     inputValue = async (event) => {
         return this.props.param.quantity < 1 || this.props.param.quantity > this.props.param.noOfCopies
-            ? this.props.updateBookQuantity(this.props.param.id, 1) : this.inputHandler(parseInt(event.target.value));
+            ? this.updateQuantity(event.target.value) : this.inputHandler(parseInt(event.target.value));
     }
 
     inputHandler = (event) => {
         this.props.updateBookQuantity(this.props.param.id, event)
         this.props.updateCartSubtotal()
+    }
+
+    updateQuantity =async (prop)=>{
+        if(prop === "0"){
+            this.props.updateBookQuantity(this.props.param.id, 1);
+            await this.setState({ status: "Sorry you cant buy Zero quantity" });
+            await this.openSnackBar();
+        }else if(prop >= this.props.param.quantity){
+            await this.props.updateBookQuantity(this.props.param.id, this.props.param.noOfCopies)
+            await this.setState({ status: "Only " + this.props.param.noOfCopies + " quantity left in our stock" });
+            this.openSnackBar();
+        }
     }
 
 
@@ -36,7 +48,7 @@ export class CartBook extends Component {
             this.props.updateCartSubtotal()
         }
         else {
-            await this.setState({ status: "Already a unit in your cart" });
+            await this.setState({ status: "Sorry you cant buy Zero quantity" });
             this.openSnackBar();
         }
     }

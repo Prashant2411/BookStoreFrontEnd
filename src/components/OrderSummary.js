@@ -15,9 +15,11 @@ const styles = theme => ({
     boxShadow: "1px 1px 1px 1px lightgray"
   },
   heading: {
-    fontSize: theme.typography.pxToRem(16),
+    fontSize: theme.typography.pxToRem(17.5),
     flexBasis: "33.33%",
-    flexShrink: 0
+    flexShrink: 0,
+    fontFamily:"Roboto"
+
   },
   button: {
     margin: "0 1% 0 0",
@@ -38,7 +40,7 @@ class OrderSummary extends React.Component {
       <ExpansionPanel className={classes.root} expanded={this.props.expanded2}>
         <ExpansionPanelSummary>
           <Typography className={classes.heading}>
-            <b>OrderSummary</b>
+            <b>Order Summary</b>
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
@@ -67,8 +69,8 @@ class OrderSummary extends React.Component {
                   </div>
                 );
               })}
-              <h4>
-                <b>Subtotal: {this.props.subTotal}</b>
+              <h4 className="subTotal">
+                <b>Subtotal: Rs.{this.props.subTotal}</b>
               </h4>
             </div>
             {this.props.booksInCart !== 0 ? (
