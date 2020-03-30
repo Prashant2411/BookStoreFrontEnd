@@ -32,10 +32,12 @@ export class CartBook extends Component {
     updateQuantity =async (prop)=>{
         if(prop === "0"){
             this.props.updateBookQuantity(this.props.param.id, 1);
+            this.props.updateCartSubtotal()
             await this.setState({ status: "Sorry you cant buy Zero quantity" });
             await this.openSnackBar();
         }else if(prop >= this.props.param.quantity){
             await this.props.updateBookQuantity(this.props.param.id, this.props.param.noOfCopies)
+            await this.props.updateCartSubtotal()
             await this.setState({ status: "Only " + this.props.param.noOfCopies + " quantity left in our stock" });
             this.openSnackBar();
         }

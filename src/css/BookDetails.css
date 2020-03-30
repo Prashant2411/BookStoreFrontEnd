@@ -240,3 +240,14 @@ body,html{
  }
  .hidden { display:none; }
 
+ .noRecord{
+    width: 200px;
+    height: 200px;
+ }
+
+ .noRecordDiv{
+     display: flex;
+     justify-content: center;
+     width: 1024px;
+     height: 70%;
+ }

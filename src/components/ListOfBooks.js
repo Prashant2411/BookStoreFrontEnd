@@ -3,6 +3,8 @@ import BookDetails from './BookDetails'
 import '../css/BookDetails.css'
 import Pagination from '@material-ui/lab/Pagination';
 import DropDownList from './DropDownList';
+import noRecord from '../asserts/noRecord.png'
+
 
 export class ListOfBooks extends Component {
     constructor(props) {
@@ -28,7 +30,7 @@ export class ListOfBooks extends Component {
                         <h2 className="bookH2">Books <span className="priceFont" style={{ color: "gray" }}> ({this.props.noOfRecord} Items)</span></h2>
                         <DropDownList sortData={this.props.sortData} />
                     </div>
-                    {books}
+                    {(this.props.noOfRecord !== 0) ? books : <div className="noRecordDiv"><img className="noRecord" alt="plus" src={noRecord} onClick={this.increaseCount} /></div>}
                     <div className="paginationDiv">
                     <Pagination shape="rounded" className="pagination" count={Math.ceil(this.props.noOfRecord / 12)}
                         onChange={this.props.handleChange} />

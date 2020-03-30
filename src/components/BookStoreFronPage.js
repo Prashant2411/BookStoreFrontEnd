@@ -64,8 +64,8 @@ class BookStoreFronPage extends Component {
   };
 
   UNSAFE_componentWillMount() {
-    this.getBookLists();
     this.totalItems("");
+    this.getBookLists();
     if (localStorage.getItem('cartBook')) {
       this.setState({ cartBooks: JSON.parse(localStorage.getItem('cartBook')) })
       this.updateQuantity()

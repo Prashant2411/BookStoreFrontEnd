@@ -23,9 +23,17 @@ export class CartDetails extends Component {
     this.parentComponent = React.createRef();
   }
 
+  componentDidMount(){
+    if(localStorage.getItem('customerDetailsExpand')){
+      this.props.handleExpantion("expanded");
+      document.getElementById("placeOrderButton").style.display = "none";
+    }
+  }
+
   handleExpantion = () => {
     document.getElementById("placeOrderButton").style.display = "none";
     this.props.handleExpantion("expanded");
+    localStorage.setItem('customerDetailsExpand',"flag")
   };
 
   render() {
