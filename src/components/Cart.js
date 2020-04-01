@@ -99,7 +99,7 @@ export class Cart extends Component {
 
   checkout = async () => {
     await JSON.parse(localStorage.getItem("cartBook")).map(value => {
-      this.state.orderDetails.push({
+      return(this.state.orderDetails.push({
         bookIds: value.id,
         noOfCopies: value.quantity,
         orderPrice: this.state.cartSubTotal,
@@ -112,9 +112,8 @@ export class Cart extends Component {
         city: JSON.parse(localStorage.getItem("customerDetails")).City,
         town: JSON.parse(localStorage.getItem("customerDetails")).Town,
         type: JSON.parse(localStorage.getItem("customerDetails")).Type
-      });
+      }));
     });
-    console.log(this.state.orderDetails)
     await addOrderData(this.state.orderDetails).then(res => {
       localStorage.clear();
       localStorage.setItem("orderId", res.data.orderBookDetail);

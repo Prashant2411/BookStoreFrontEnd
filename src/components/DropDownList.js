@@ -68,10 +68,7 @@ class NativeSelects extends React.Component {
         console.log(err);
       });
       if(localStorage.getItem('sortBooks')){
-        console.log(JSON.parse(localStorage.getItem('sortBooks')))
         this.setState({sortKey:JSON.parse(localStorage.getItem('sortBooks'))})
-      } else{
-        this.setState({sortKey:this.state.sortBy[0]})
       }
       
   }

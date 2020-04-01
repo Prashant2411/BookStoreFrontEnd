@@ -5,7 +5,6 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -317,9 +316,9 @@ class ControlledExpansionPanels extends React.Component {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextareaAutosize
-                className={classes.textarea}
-                arial-label="Address"
+              <TextField
+                className={classes.textField}
+                label="Address"
                 rowsMin={4}
                 id="customerDetails4"
                 value={this.state.Address}

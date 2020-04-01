@@ -78,9 +78,10 @@ class BookStoreFronPage extends Component {
   updateQuantity = async () => {
     await this.setState({ cartBookCount: 0 })
     await this.state.cartBooks.map((value, index) => {
+      return (
       this.setState((prev) => ({
         cartBooksCount: prev.cartBooksCount + value.quantity
-      }))
+      })))
     })
   };
 

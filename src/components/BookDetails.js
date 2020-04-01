@@ -22,10 +22,10 @@ export class BookDetails extends Component {
 
   addToCart = () => {
     this.props.setCartBooks(this.props.bookList);
-    this.componentWillMount();
+    this.UNSAFE_componentWillMount();
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (localStorage.getItem("cartBook")) {
       JSON.parse(localStorage.getItem("cartBook")).map((value, index) => {
         return value.id === this.props.bookList.id
