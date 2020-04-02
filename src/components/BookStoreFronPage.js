@@ -48,7 +48,7 @@ class BookStoreFronPage extends Component {
 
   getBookLists = () => {
     if (this.state.displayType === "allBooks") {
-      getBookList(this.state.page, this.state.page)
+      getBookList(this.state.page)
         .then(res => {
           this.setState({ bookList: res.data });
         })
